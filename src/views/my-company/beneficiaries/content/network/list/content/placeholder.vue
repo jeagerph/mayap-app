@@ -1,0 +1,19 @@
+<template>
+<div>
+    <ap-placeholder 
+        :size="'medium'"/>
+    <ap-placeholder 
+        class="ap-margin-xsmall-top"
+        :size="'medium'"/>
+    <ap-placeholder 
+        class="ap-margin-xsmall-top"
+        :size="'medium'"/>
+    <ap-placeholder 
+        class="ap-margin-xsmall-top"
+        :size="'medium'"/>
+    <ap-placeholder 
+        class="ap-margin-xsmall-top"
+        :size="'medium'"/>
+</div>
+
+</template>

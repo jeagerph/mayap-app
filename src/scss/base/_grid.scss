@@ -1,0 +1,448 @@
+// Name:            Grid
+// Description:     Component to create responsive, fluid and nestable grids
+//
+// Component:       `ap-grid`
+//
+// Modifiers:       `ap-grid-small`
+//                  `ap-grid-medium`
+//                  `ap-grid-large`
+//                  `ap-grid-collapse`
+//                  `ap-grid-divider`
+//                  `ap-grid-match`
+//                  `ap-grid-stack`
+//                  `ap-grid-margin`
+//                  `ap-grid-margin-small`
+//                  `ap-grid-margin-medium`
+//                  `ap-grid-margin-large`
+//                  `ap-grid-margin-collapse`
+//
+// Sub-Modifiers:   `ap-grid-item-match`
+//
+// States:          `ap-first-column`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$grid-gutter-horizontal:                gutter(small) !default;
+$grid-gutter-vertical:                  $grid-gutter-horizontal !default;
+$grid-gutter-horizontal-l:              gutter(medium) !default;
+$grid-gutter-vertical-l:                $grid-gutter-horizontal-l !default;
+
+$grid-small-gutter-horizontal:          gutter(xsmall) !default;
+$grid-small-gutter-vertical:            $grid-small-gutter-horizontal !default;
+
+$grid-medium-gutter-horizontal:         gutter(medium) !default;
+$grid-medium-gutter-vertical:           $grid-medium-gutter-horizontal !default;
+
+$grid-large-gutter-horizontal:          gutter(medium) !default;
+$grid-large-gutter-vertical:            $grid-large-gutter-horizontal !default;
+$grid-large-gutter-horizontal-l:        gutter(large) !default;
+$grid-large-gutter-vertical-l:           $grid-large-gutter-horizontal-l !default;
+
+$grid-divider-border-width:             border(border-width) !default;
+$grid-divider-border:                   border(border-color) !default;
+
+
+/* ==================================================
+    Component: Grid
+   ================================================== */  
+
+/*
+ * 1. Allow cells to wrap in to the next line
+ * 2. Reset list
+ */
+
+.ap-grid{
+    display: flex;
+    /* 1 */
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * Grid cell
+ * Note: Space is allocated solely based on content dimensions, but shrinks: 0 1 auto
+ * Reset margin for e.g. paragraphs
+ */
+
+.ap-grid > *{
+    margin: 0;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.ap-margin > * > :last-child{
+    margin-bottom: 0;
+}
+
+
+
+/* Gutter
+   ================================================== */
+
+/*
+ * Default
+ */
+
+/* Horizontal */
+.ap-grid{
+    margin-left: (-$grid-gutter-horizontal);
+}
+
+.ap-grid > *{
+    padding-left: $grid-gutter-horizontal;
+}
+
+/* Vertical */
+.ap-grid + .ap-grid,
+.ap-grid > .ap-grid-margin,
+* + .ap-grid-margin{
+    margin-top: $grid-gutter-vertical;
+}
+
+/* Desktop and bigger */
+@include respond-to(large){
+    .ap-grid{
+        margin-left: (-$grid-gutter-horizontal-l)
+    }
+
+    .ap-grid > *{
+        padding-left: $grid-gutter-horizontal-l
+    }
+
+    .ap-grid + .ap-grid,
+    .ap-grid > .ap-grid-margin,
+    * + .ap-grid-margin{
+        margin-top: $grid-gutter-vertical-l;
+    }
+}
+
+
+
+/*
+ * Small
+ */
+
+/* Horizontal */
+.ap-grid-small{
+    margin-left: (-$grid-small-gutter-horizontal);
+}
+
+.ap-grid-small > *{
+    padding-left: $grid-small-gutter-horizontal;
+}
+
+/* Vertical */
+.ap-grid + .ap-grid-small,
+.ap-grid-small > .ap-grid-margin,
+* + .ap-grid-margin-small{
+    margin-top: $grid-small-gutter-vertical;
+}
+
+
+
+/*
+ * Medium
+ */
+
+/* Horizontal */
+.ap-grid-medium{
+    margin-left: (-$grid-medium-gutter-horizontal);
+}
+
+.ap-grid-medium > *{
+    padding-left: $grid-medium-gutter-horizontal;
+}
+
+/* Vertical */
+.ap-grid + .ap-grid-medium,
+.ap-grid-medium > .ap-grid-margin,
+* + .ap-grid-margin-medium{
+    margin-top: $grid-medium-gutter-vertical;
+}
+
+
+
+/*
+ * Large
+ */
+
+/* Horizontal */
+.ap-grid-large{
+    margin-left: (-$grid-large-gutter-horizontal);
+}
+
+.ap-grid-large > *{
+    padding-left: $grid-large-gutter-horizontal;
+}
+
+/* Vertical */
+.ap-grid + .ap-grid-large,
+.ap-grid-large > .ap-grid-margin,
+* + .ap-grid-margin-large{
+    margin-top: $grid-large-gutter-vertical;
+}
+
+/* Desktop and bigger */
+@include respond-to(large){
+    .ap-grid-large{
+        margin-left: (-$grid-large-gutter-horizontal-l)
+    }
+
+    .ap-grid-large > *{
+        padding-left: $grid-large-gutter-horizontal-l
+    }
+
+    .ap-grid + .ap-grid-large,
+    .ap-grid-large > .ap-grid-margin,
+    * + .ap-grid-margin-large{
+        margin-top: $grid-large-gutter-vertical-l;
+    }
+}
+
+
+
+/*
+ * Collapse
+ */
+
+/* Horizontal */
+.ap-grid-collapse{
+    margin-left: 0;
+}
+
+.ap-grid-collapse > *{
+    padding-left: 0;
+}
+
+/* Vertical */
+.ap-grid + .ap-grid-collapse,
+.ap-grid-collapse > .ap-grid-margin{
+    margin-top: 0;
+}
+
+
+
+/* Divider
+   ================================================== */
+
+.ap-grid-divider{
+    position: relative;
+}
+
+.ap-grid-divider > :not(.ap-first-column)::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-left: $grid-divider-border-width solid $grid-divider-border;
+}
+
+.ap-grid-divider .ap-grid-stock > .ap-grid-margin::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: $grid-divider-border-width solid $grid-divider-border;
+}
+
+/*
+ * Default
+ */
+ 
+/* Horizontal */
+.ap-grid-divider{
+    margin-left: (-$grid-gutter-horizontal * 2);
+}
+
+.ap-grid-divider > *{
+    padding-left: $grid-gutter-horizontal * 2;
+}
+
+.ap-grid-divider > :not(.ap-first-column)::before{
+    left: $grid-gutter-horizontal;
+}
+
+/* Vertical */
+.ap-grid-divider .ap-grid-stack > .ap-grid-margin{
+    margin-top: ($grid-gutter-horizontal * 2);
+}
+
+.ap-grid-divider .ap-grid-stack > .ap-grid-margin::before{
+    top: (-$grid-gutter-vertical);
+    left: ($grid-gutter-horizontal * 2);
+}
+
+/* Desktop and bigger */
+@include respond-to(large){
+    /* Horizontal */
+    .ap-grid-divider{
+        margin-left: (-$grid-gutter-horizontal-l * 2);
+    }
+
+    .ap-grid-divider > *{
+        padding-left: $grid-gutter-horizontal-l * 2;
+    }
+
+    .ap-grid-divider > :not(.ap-first-column)::before{
+        left: $grid-gutter-horizontal-l;
+    }
+
+    /* Vertical */
+    .ap-grid-divider .ap-grid-stack > .ap-grid-margin{
+        margin-top: ($grid-gutter-horizontal-l * 2);
+    }
+
+    .ap-grid-divider .ap-grid-stack > .ap-grid-margin::before{
+        top: (-$grid-gutter-vertical-l);
+        left: ($grid-gutter-horizontal-l * 2);
+    }
+}
+
+
+
+/*
+ * Small
+ */
+ 
+/* Horizontal */
+.ap-grid-divider .ap-grid-small{
+    margin-left: (-$grid-small-gutter-horizontal * 2);
+}
+
+.ap-grid-divider .ap-grid-small > *{
+    padding-left: $grid-small-gutter-horizontal * 2;
+}
+
+.ap-grid-divider .ap-grid-small > :not(.ap-first-column)::before{
+    left: $grid-small-gutter-horizontal;
+}
+
+/* Vertical */
+.ap-grid-divider .ap-grid-small .ap-grid-stack > .ap-grid-margin{
+    margin-top: ($grid-small-gutter-horizontal * 2);
+}
+
+.ap-grid-divider .ap-grid-small .ap-grid-stack > .ap-grid-margin::before{
+    top: (-$grid-small-gutter-vertical);
+    left: ($grid-small-gutter-horizontal * 2);
+}
+
+
+
+/*
+ * Medium
+ */
+ 
+/* Horizontal */
+.ap-grid-divider .ap-grid-medium{
+    margin-left: (-$grid-medium-gutter-horizontal * 2);
+}
+
+.ap-grid-divider .ap-grid-medium > *{
+    padding-left: $grid-medium-gutter-horizontal * 2;
+}
+
+.ap-grid-divider .ap-grid-medium > :not(.ap-first-column)::before{
+    left: $grid-medium-gutter-horizontal;
+}
+
+/* Vertical */
+.ap-grid-divider .ap-grid-medium .ap-grid-stack > .ap-grid-margin{
+    margin-top: ($grid-medium-gutter-horizontal * 2);
+}
+
+.ap-grid-divider .ap-grid-medium .ap-grid-stack > .ap-grid-margin::before{
+    top: (-$grid-medium-gutter-vertical);
+    left: ($grid-medium-gutter-horizontal * 2);
+}
+
+
+
+/*
+ * Large
+ */
+ 
+/* Horizontal */
+.ap-grid-divider .ap-grid-large{
+    margin-left: (-$grid-large-gutter-horizontal * 2);
+}
+
+.ap-grid-divider .ap-grid-large > *{
+    padding-left: $grid-large-gutter-horizontal * 2;
+}
+
+.ap-grid-divider .ap-grid-large > :not(.ap-first-column)::before{
+    left: $grid-large-gutter-horizontal;
+}
+
+/* Vertical */
+.ap-grid-divider .ap-grid-large .ap-grid-stack > .ap-grid-margin{
+    margin-top: ($grid-large-gutter-horizontal * 2);
+}
+
+.ap-grid-divider .ap-grid-large .ap-grid-stack > .ap-grid-margin::before{
+    top: (-$grid-large-gutter-vertical);
+    left: ($grid-large-gutter-horizontal * 2);
+}
+
+/* Desktop and bigger */
+@include respond-to(large){
+    /* Horizontal */
+    .ap-grid-divider .ap-grid-large{
+        margin-left: (-$grid-large-gutter-horizontal-l * 2);
+    }
+
+    .ap-grid-divider .ap-grid-large > *{
+        padding-left: $grid-large-gutter-horizontal-l * 2;
+    }
+
+    .ap-grid-divider .ap-grid-large > :not(.ap-first-column)::before{
+        left: $grid-large-gutter-horizontal-l;
+    }
+
+    /* Vertical */
+    .ap-grid-divider .ap-grid-large .ap-grid-stack > .ap-grid-margin{
+        margin-top: ($grid-large-gutter-horizontal-l * 2);
+    }
+
+    .ap-grid-divider .ap-grid-large .ap-grid-stack > .ap-grid-margin::before{
+        top: (-$grid-gutter-vertical-l);
+        left: ($grid-gutter-horizontal-l * 2);
+    }
+}
+
+
+
+/* Match child of a grid cell
+   ================================================== */
+
+/*
+ * Behave like a block element
+ * 1. Wrap into the next line
+ * 2. Take the full width of at leaset 100%, Only if no class from width component is set.
+ * 3. Expand width even if larger than 100%. e.g. because of negative margin (Needed for nested grids)
+ */
+
+.ap-grid-match > *,
+.ap-grid-item-match{
+    display: flex;
+    /* 1 */
+    flex-wrap: wrap;
+}
+
+.ap-grid-match > * > :not([class*='ap-width']),
+.ap-grid-item-match > :not([class*='ap-width']){
+    /* 2 */
+    box-sizing: border-box;
+    width: 100%;
+    /* 3 */
+    flex: auto;
+}

@@ -1,0 +1,240 @@
+// Name:            Position
+// Description:     Utilities to position content
+//
+// Component:       `ap-position-absolute`
+//                  `ap-position-relative`
+//                  `ap-position-z-index`
+//                  `ap-position-top`
+//                  `ap-position-bottom`
+//                  `ap-position-left`
+//                  `ap-position-right`
+//                  `ap-position-top-left`
+//                  `ap-position-top-center`
+//                  `ap-position-top-right`
+//                  `ap-position-bottom-left`
+//                  `ap-position-bottom-center`
+//                  `ap-position-bottom-right`
+//                  `ap-position-center`
+//                  `ap-position-center-left`
+//                  `ap-position-center-right`
+//                  `ap-position-cover`
+//
+// Modifiers:       `ap-position-small`
+//                  `ap-position-medium`
+//                  `ap-position-large`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$position-small-margin:                                 gutter(small) !default;
+$position-medium-margin:                                gutter(medium) !default;
+$position-large-margin:                                 gutter(small) !default;
+$position-large-margin-l:                               50px !default;
+
+
+/* ========================================================================
+   Component: Position
+ ========================================================================== */
+
+
+/* Directions
+ ========================================================================== */
+
+[class*='ap-position-top'],
+[class*='ap-position-bottom'],
+[class*='ap-position-left'],
+[class*='ap-position-right'],
+[class*='ap-position-center'] { position: absolute !important; }
+
+
+/* Edges
+ ========================================================================== */
+
+/* Don't use `width: 100%` because it is wrong if the parent has padding. */
+.ap-position-top {
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.ap-position-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.ap-position-left {
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.ap-position-right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+/* Corners
+ ========================================================================== */
+
+.ap-position-top-left {
+    top: 0;
+    left: 0;
+}
+
+.ap-position-top-right {
+    top: 0;
+    right: 0;
+}
+
+.ap-position-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.ap-position-bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+/*
+ * Center
+ * 1. Fix text wrapping if content is larger than 50% of the container (Not working in Firefox)
+ * 2. Fix text wrapping for Firefox
+ */
+
+.ap-position-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* 1 */
+    display: table;
+    /* 2 */
+    width: -moz-max-content;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Vertical */
+[class*='ap-position-center-left'],
+[class*='ap-position-center-right'] {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ap-position-center-left { left: 0; }
+.ap-position-center-right { right: 0; }
+
+.ap-position-center-left-out {
+    right: 100%;
+    width: max-content;
+}
+
+.ap-position-center-right-out {
+    left: 100%;
+    width: max-content;
+}
+
+/* Horizontal */
+.ap-position-top-center,
+.ap-position-bottom-center {
+    left: 50%;
+    transform: translateX(-50%);
+    /* 1 */
+    display: table;
+    /* 2 */
+    width: -moz-max-content;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.ap-position-top-center { top: 0; }
+.ap-position-bottom-center { bottom: 0; }
+
+
+/* Cover
+ ========================================================================== */
+
+.ap-position-cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+/* Utility
+ ========================================================================== */
+
+.ap-position-relative { position: relative !important; }
+
+.ap-position-absolute { position: absolute !important; }
+
+.ap-position-fixed { position: fixed !important; }
+
+.ap-position-z-index { z-index: 1; }
+
+
+/* Margin modifier
+ ========================================================================== */
+
+/*
+ * Small
+ */
+
+.ap-position-small { margin: $position-small-margin; }
+
+.ap-position-small.ap-position-center { transform: translate(-50%, -50%) translate(-$position-small-margin, (-$position-small-margin)); }
+
+.ap-position-small[class*='ap-position-center-left'],
+.ap-position-small[class*='ap-position-center-right'] { transform: translateY(-50%) translateY(-$position-small-margin); }
+
+.ap-position-small.ap-position-top-center,
+.ap-position-small.ap-position-bottom-center { transform: translateX(-50%) translateX(-$position-small-margin); }
+
+/*
+ * Medium
+ */
+
+.ap-position-medium { margin: $position-medium-margin; }
+
+.ap-position-medium.ap-position-center { transform: translate(-50%, -50%) translate(-$position-medium-margin, (-$position-medium-margin)); }
+
+.ap-position-medium[class*='ap-position-center-left'],
+.ap-position-medium[class*='ap-position-center-right'] { transform: translateY(-50%) translateY(-$position-medium-margin); }
+
+.ap-position-medium.ap-position-top-center,
+.ap-position-medium.ap-position-bottom-center { transform: translateX(-50%) translateX(-$position-medium-margin); }
+
+/*
+ * Large
+ */
+
+.ap-position-large { margin: $position-large-margin; }
+
+.ap-position-large.ap-position-center { transform: translate(-50%, -50%) translate(-$position-large-margin, (-$position-large-margin)); }
+
+.ap-position-large[class*='ap-position-center-left'],
+.ap-position-large[class*='ap-position-center-right'] { transform: translateY(-50%) translateY(-$position-large-margin); }
+
+.ap-position-large.ap-position-top-center,
+.ap-position-large.ap-position-bottom-center { transform: translateX(-50%) translateX(-$position-large-margin); }
+
+/* Desktop and bigger */
+@include respond-to(large){
+    .ap-position-large { margin: $position-large-margin-l; }
+
+    .ap-position-large.ap-position-center { transform: translate(-50%, -50%) translate(-$position-large-margin-l, (-$position-large-margin-l)); }
+
+    .ap-position-large[class*='ap-position-center-left'],
+    .ap-position-large[class*='ap-position-center-right'] { transform: translateY(-50%) translateY(-$position-large-margin-l); }
+
+    .ap-position-large.ap-position-top-center,
+    .ap-position-large.ap-position-bottom-center { transform: translateX(-50%) translateX(-$position-large-margin-l); }
+}

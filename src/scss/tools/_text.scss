@@ -1,0 +1,407 @@
+// Name:            Container
+// Description:     Utilities for text
+//
+// Component:       `ap-text-*`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$text-header-font-size:                     font-size(xxlarge) !default;
+$text-header-line-height:                   font(line-height) !default;
+$text-header-kerning:                       font(kerning) !default;
+$text-header-color:                         color(emphasis) !default;
+$text-header-font-weight:                   font-weight(bold) !default;
+
+$text-title-font-size:                      font-size(xlarge) !default;
+$text-title-line-height:                    font(line-height) !default;
+$text-title-kerning:                        font(kerning) !default;
+$text-title-color:                          color(emphasis) !default;
+$text-title-font-weight:                    font-weight(bold) !default;
+
+$text-headline-font-size:                   font-size(large) !default;
+$text-headline-line-height:                 font(line-height) !default;
+$text-headline-kerning:                     font(kerning) !default;
+$text-headline-color:                       color(emphasis) !default;
+$text-headline-font-weight:                 font-weight(bold) !default;
+
+
+$text-lead-font-size:                       font-size(medium) !default;
+$text-lead-line-height:                     font(line-height) !default;
+$text-lead-kerning:                         font(kerning) !default;
+$text-lead-color:                           color(emphasis) !default;
+$text-lead-font-weight:                     font-weight(bold) !default;
+
+$text-meta-font-size:                       font-size(small) !default;
+$text-meta-line-height:                     font(line-height) !default;
+$text-meta-kerning:                         font(kerning) !default;
+$text-meta-color:                           color(muted) !default;
+$text-meta-font-weight:                     font-weight(light) !default;
+
+$text-small-font-size:                      font-size(small) !default;
+$text-small-line-height:                    1.5 !default;
+
+$text-large-font-size:                      font-size(large) !default;
+$text-large-line-height:                    1.5 !default;
+
+$text-bold-font-weight:                     font-weight(black) !default;
+
+$text-background-color:                     theme-color(primary) !default;
+
+
+
+/* ==================================================
+    Component: Text
+   ================================================== */    
+
+
+.ap-text-header{
+    font-size: $text-header-font-size;
+    line-height: $text-header-line-height;
+    letter-spacing: $text-header-kerning;
+    color: $text-header-color;
+    font-weight: $text-header-font-weight;
+}
+
+.ap-text-title{
+    font-size: $text-title-font-size;
+    line-height: $text-title-line-height;
+    letter-spacing: $text-title-kerning;
+    color: $text-title-color;
+    font-weight: $text-title-font-weight;
+}
+
+.ap-text-headline{
+    font-size: $text-headline-font-size;
+    line-height: $text-headline-line-height;
+    letter-spacing: $text-headline-kerning;
+    color: $text-headline-color;
+    font-weight: $text-headline-font-weight;
+}
+
+.ap-text-lead{
+    font-size: $text-lead-font-size;
+    line-height: $text-lead-line-height;
+    letter-spacing: $text-lead-kerning;
+    color: $text-lead-color;
+    font-weight: $text-lead-font-weight;
+}
+
+.ap-text-meta{
+    font-size: $text-meta-font-size;
+    line-height: $text-meta-line-height;
+    letter-spacing: $text-meta-kerning;
+    color: $text-meta-color;
+    font-weight: $text-meta-font-weight;
+}
+
+@include respond-to(medium){
+    .ap-text-header{
+        font-size: $text-header-font-size;
+        line-height: $text-header-line-height;
+        letter-spacing: $text-header-kerning;
+        color: $text-header-color;
+        font-weight: $text-header-font-weight;
+    }
+    
+    .ap-text-title{
+        font-size: $text-title-font-size;
+        line-height: $text-title-line-height;
+        letter-spacing: $text-title-kerning;
+        color: $text-title-color;
+        font-weight: $text-title-font-weight;
+    }
+    
+    .ap-text-headline{
+        font-size: $text-headline-font-size;
+        line-height: $text-headline-line-height;
+        letter-spacing: $text-headline-kerning;
+        color: $text-headline-color;
+        font-weight: $text-headline-font-weight;
+    }
+    
+    .ap-text-lead{
+        font-size: $text-lead-font-size;
+        line-height: $text-lead-line-height;
+        letter-spacing: $text-lead-kerning;
+        color: $text-lead-color;
+        font-weight: $text-lead-font-weight;
+    }
+    
+    .ap-text-meta{
+        font-size: $text-meta-font-size;
+        line-height: $text-meta-line-height;
+        letter-spacing: $text-meta-kerning;
+        color: $text-meta-color;
+        font-weight: $text-meta-font-weight;
+    }
+
+}
+
+
+/* Style modifiers
+   ================================================== */
+
+.ap-text-bold{
+    font-weight: $text-bold-font-weight;
+}
+
+.ap-text-italic{
+    font-style: italic;
+}
+
+.ap-text-oblique{
+    font-style: oblique;
+}
+
+.ap-text-underline{
+    text-decoration: underline;
+}
+
+
+
+/* Transform modifiers
+   ================================================== */
+
+.ap-text-uppercase{
+    text-transform: uppercase !important;
+}
+
+.ap-text-capitalize{
+    text-transform: capitalize !important;
+}
+
+.ap-text-lowercase{
+    text-transform: lowercase !important;
+}
+
+
+
+/* Color modifiers
+   ================================================== */
+
+@include create-text-modifiers(text);
+
+
+
+/* Background modifiers
+   ================================================== */
+
+/*
+ * 1. The background clips to the foreground text. Works in Chrome, Firefox, Safari, Edge and Opera
+ *    Default color is set to transparent
+ * 2. Container fills the text
+ * 3. Fallback color for IE11
+ */
+
+.ap-text-background{
+    /* 1 */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* 2 */
+    display: inline-block;
+    /* 3 */
+    color: $text-background-color;
+}
+
+@supports (-webkit-background-clip: text){
+    .ap-text-background{
+        background-color: $text-background-color;
+    }
+}
+
+/* Alignment modifiers
+   ================================================== */
+
+.ap-text-left{
+    text-align: left !important;
+}
+
+.ap-text-right{
+    text-align: right !important;
+}
+
+.ap-text-center{
+    text-align: center !important;
+}
+
+.ap-text-justify{
+    text-align: justify !important;
+}
+
+/* Phone landscape and bigger */
+@include respond-to(small){
+    
+    .ap-text-left\@s{
+        text-align: left !important;
+    }
+    
+    .ap-text-right\@s{
+        text-align: right !important;
+    }
+    
+    .ap-text-center\@s{
+        text-align: center !important;
+    }
+
+}
+
+/* Tablet landscape and bigger */
+@include respond-to(medium){
+    
+    .ap-text-left\@m{
+        text-align: left !important;
+    }
+    
+    .ap-text-right\@m{
+        text-align: right !important;
+    }
+    
+    .ap-text-center\@m{
+        text-align: center !important;
+    }
+    
+}
+
+/* Desktop  and bigger */
+@include respond-to(large){
+    
+    .ap-text-left\@l{
+        text-align: left !important;
+    }
+    
+    .ap-text-right\@l{
+        text-align: right !important;
+    }
+    
+    .ap-text-center\@l{
+        text-align: center !important;
+    }
+    
+}
+
+/* Desktop  and bigger */
+@include respond-to(large){
+    
+    .ap-text-left\@xl{
+        text-align: left !important;
+    }
+    
+    .ap-text-right\@xl{
+        text-align: right !important;
+    }
+    
+    .ap-text-center\@xl{
+        text-align: center !important;
+    }
+    
+}
+
+
+
+/* Vertical modifiers
+   ================================================== */
+
+.ap-text-top{
+    vertical-align: top !important;
+}
+
+.ap-text-middle{
+    vertical-align: middle !important;
+}
+
+.ap-text-bottom{
+    vertical-align: bottom !important;
+}
+
+.ap-text-baseline{
+    vertical-align: baseline !important;
+}
+
+
+
+/* Wrap modifiers
+   ================================================== */
+
+/*
+ * Prevent text from wrapping into multiple lines
+ */
+
+.ap-text-nowrap{
+    white-space: nowrap;
+}
+
+
+/*
+ * 1. Make sure a max-width is set after which truncation can occur
+ * 2. Prevent text from wrapping onto multiple lines, and truncate with an ellipsis
+ * 3. Fix for table cells
+ */
+
+.ap-text-truncate{
+    /* 1 */
+    max-width: 100%;
+    /* 2 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 3 */
+th.ap-text-truncate,
+td.ap-text-truncate{
+    max-width: 0;
+}
+
+/*
+ * 1. Wrap long words onto the next line and break them if they are too long to fit
+ * 2. Legacy `word-wrap` as fallback for `overflow-wrap`
+ * 3. Fix `overflow-wrap` which doesn't work with table cells in Chrome, Opera, IE11, and Edge
+ *    Must use `break-all` to support IE11 and Edge
+ * Note: Not using `hypens: auto;` because it hypenates text even if not needed.
+ */
+
+.ap-text-break{
+    /* 1 */
+    overflow-wrap: break-word;
+    /* 2 */
+    word-wrap: break-word;
+}
+
+/* 3 */
+th.ap-text-break,
+td.ap-text-break{
+    word-break: break-all;
+}
+
+
+.ap-text-pre-line{
+    white-space: pre-line;
+}
+
+.ap-text-spacing-reduce {
+    letter-spacing: -.40px;
+}
+
+.ap-preview-content p {
+    text-indent: 50px;
+    font-size: 16px;
+}
+
+.ap-text-indent {
+    text-indent: 50px;
+}
+
+.ap-opacity {
+    opacity: 0.5
+}
+
+a.ap-link-reset,
+a.ap-link-reset:hover,
+.ap-link-reset a,
+.ap-link-reset a:hover{
+    color: inherit;
+    text-decoration: none;
+}

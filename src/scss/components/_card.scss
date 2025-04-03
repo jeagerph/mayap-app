@@ -1,0 +1,554 @@
+// Name:            Card
+// Description:     Component to create boxed content containers
+//
+// Component:       `ap-card`
+//
+// Sub-objects:     `ap-card-body`
+//                  `ap-card-header`
+//                  `ap-card-footer`
+//                  `ap-media-*`
+//                  `ap-card-title`
+//                  `ap-card-badge`
+//
+// Modifiers:       `ap-card-hover`
+//                  `ap-card-default`
+//                  `ap-card-primary`
+//                  `ap-card-secondary`
+//                  `ap-card-small`
+//                  `ap-card-large`
+//
+// Uses:            `ap-grid-stack`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$card-border-color:                         border(border-color) !default;
+$card-border-primary-color:                 color(primary) !default;
+$card-border-secondary-color:               color(secondary) !default;
+$card-border-success-color:                 color(success) !default;
+$card-border-warning-color:                 color(warning) !default;
+$card-border-danger-color:                  color(danger) !default;
+$card-border-pink-color:                    color(customPink) !default;
+$card-border-orange-color:                  color(customOrange) !default;
+
+$card-border-width:                         border(border-width) !default;
+$card-border-radius:                        4px !default;
+
+$card-body-padding-horizontal:              gutter(small) !default;
+$card-body-padding-vertical:                gutter(small) !default;
+
+$card-body-padding-horizontal-l:            gutter(medium) !default;
+$card-body-padding-vertical-l:              gutter(medium) !default;
+
+$card-header-padding-horizontal:            gutter(small) !default;
+$card-header-padding-vertical:              calc(gutter(small) / 2) !default;
+
+$card-header-padding-horizontal-l:          gutter(medium) !default;
+$card-header-padding-vertical-l:            calc(gutter(medium) / 2) !default;
+
+$card-footer-padding-horizontal:            gutter(small) !default;
+$card-footer-padding-vertical:              calc(gutter(small) / 2) !default;
+
+$card-footer-padding-horizontal-l:          gutter(medium) !default;
+$card-footer-padding-vertical-l:            calc(gutter(medium) / 2) !default;
+
+$card-title-font-size:                      font-size(large) !default;
+$card-title-line-height:                    1.4 !default;
+
+$card-badge-top:                            gutter(small) !default;
+$card-badge-right:                          gutter(small) !default;
+
+$card-hover-background:                     theme-color(default) !default;
+
+$card-default-background:                   $global-background !default;
+$card-default-color:                        color(default) !default;
+$card-default-title-color:                  color(emphasis) !default;
+$card-default-hover-background:             darken($card-default-background , 5%) !default;
+
+$card-primary-background:                   theme-color(primary) !default;
+$card-primary-color:                        color(inverse) !default;
+$card-primary-title-color:                  theme-color(primary) !default;
+$card-primary-hover-background:             darken($card-primary-background, 5%) !default;
+
+$card-secondary-background:                 theme-color(secondary) !default;
+$card-secondary-color:                      color(inverse) !default;
+$card-secondary-title-color:                color(inverse) !default;
+$card-secondary-hover-background:           darken($card-secondary-background, 5%) !default;
+
+$card-success-background:                 theme-color(success) !default;
+$card-success-color:                      color(inverse) !default;
+$card-success-title-color:                color(inverse) !default;
+$card-success-hover-background:           darken($card-success-background, 5%) !default;
+
+$card-warning-background:                 theme-color(warning) !default;
+$card-warning-color:                      color(inverse) !default;
+$card-warning-title-color:                color(inverse) !default;
+$card-warning-hover-background:           darken($card-warning-background, 5%) !default;
+
+$card-danger-background:                 theme-color(danger) !default;
+$card-danger-color:                      color(inverse) !default;
+$card-danger-title-color:                color(inverse) !default;
+$card-danger-hover-background:           darken($card-danger-background, 5%) !default;
+
+$card-orange-background:                   theme-color(customOrange) !default;
+$card-orange-color:                        color(inverse) !default;
+$card-orange-title-color:                  theme-color(customOrange) !default;
+$card-orange-hover-background:             darken($card-orange-background, 5%) !default;
+
+$card-pink-background:                   theme-color(customPink) !default;
+$card-pink-color:                        color(inverse) !default;
+$card-pink-title-color:                  theme-color(customPink) !default;
+$card-pink-hover-background:             darken($card-pink-background, 5%) !default;
+
+$card-xsmall-body-padding-horizontal:        gutter(xsmall) !default;
+$card-xsmall-body-padding-vertical:          gutter(xsmall) !default;
+$card-xsmall-header-padding-horizontal:      gutter(xsmall) !default;
+$card-xsmall-header-padding-vertical:        calc(margin(xsmall) / 1.5) !default;
+$card-xsmall-footer-padding-horizontal:      gutter(xsmall) !default;
+$card-xsmall-footer-padding-vertical:        calc(margin(xsmall) / 1.5) !default;
+
+$card-small-body-padding-horizontal:        gutter(small) !default;
+$card-small-body-padding-vertical:          gutter(small) !default;
+$card-small-header-padding-horizontal:      gutter(small) !default;
+$card-small-header-padding-vertical:        calc(margin(small) / 1.5) !default;
+$card-small-footer-padding-horizontal:      gutter(small) !default;
+$card-small-footer-padding-vertical:        calc(margin(small) / 1.5) !default;
+
+$card-medium-body-padding-horizontal:        gutter(medium) !default;
+$card-medium-body-padding-vertical:          gutter(medium) !default;
+$card-medium-header-padding-horizontal:      gutter(medium) !default;
+$card-medium-header-padding-vertical:        calc(margin(medium) / 2) !default;
+$card-medium-footer-padding-horizontal:      gutter(medium) !default;
+$card-medium-footer-padding-vertical:        calc(margin(medium) / 2) !default;
+
+$card-large-body-padding-horizontal-l:      gutter(large) !default;
+$card-large-body-padding-vertical-l:        gutter(large) !default;
+$card-large-header-padding-horizontal-l:    gutter(large) !default;
+$card-large-header-padding-vertical-l:      calc(gutter(large) / 2) !default;
+$card-large-footer-padding-horizontal-l:    gutter(large) !default;
+$card-large-footer-padding-vertical-l:      calc(gutter(large) / 2) !default;
+
+
+/* ==================================================
+    Component: Card
+   ================================================== */    
+
+.ap-card{
+    position: relative;
+    box-sizing: border-box;
+
+    border-radius: $card-border-radius;
+    transition: all 0.3s ease;
+}
+
+.ap-card-user .ap-card-body{
+    position: relative;
+    overflow: hidden;
+    border-radius: $card-border-radius;
+}
+
+.ap-card-border{
+    border: $card-border-width solid $card-border-color;
+}
+
+.ap-card-border-primary{
+    border: $card-border-width solid $card-border-primary-color;
+}
+
+.ap-card-border-secondary{
+    border: $card-border-width solid $card-border-secondary-color;
+}
+
+.ap-card-border-success{
+    border: $card-border-width solid $card-border-success-color;
+}
+
+.ap-card-border-warning{
+    border: $card-border-width solid $card-border-warning-color;
+}
+
+.ap-card-border-danger{
+    border: $card-border-width solid $card-border-danger-color;
+}
+
+.ap-card-border-pink{
+    border: $card-border-width solid $card-border-pink-color;
+}
+
+.ap-card-border-orange{
+    border: $card-border-width solid $card-border-orange-color;
+}
+
+/* Sections
+   ================================================== */ 
+
+.ap-card-body{
+    padding: $card-body-padding-vertical $card-body-padding-horizontal;
+}
+
+.ap-card-header{
+    padding: $card-header-padding-vertical $card-header-padding-horizontal;
+    border-bottom: 1px solid $card-border-color;
+}
+
+.ap-card-footer{
+    padding: $card-footer-padding-vertical $card-footer-padding-horizontal;
+    border-top: 1px solid $card-border-color;
+}
+
+/* Desktop and bigget */
+@include respond-to(large){
+    .ap-card-body{
+        padding: $card-body-padding-vertical-l $card-body-padding-horizontal-l;
+    }
+    
+    .ap-card-header{
+        padding: $card-header-padding-vertical-l $card-header-padding-horizontal-l;
+    }
+    
+    .ap-card-footer{
+        padding: $card-footer-padding-vertical-l $card-footer-padding-horizontal-l;
+    }
+}
+
+
+
+/*
+ * Micro clearfix
+ */
+
+.ap-card-body,
+.ap-card-header,
+.ap-card-footer{
+    @include clearfix;
+}
+
+
+/*
+ * Remove margin from the last child
+ */
+
+.ap-card-body > :last-child,
+.ap-card-header > :last-child,
+.ap-card-footer > :last-child{
+    margin-bottom: 0;
+}
+
+
+/* Title
+   ================================================== */ 
+
+.ap-card-title{
+    font-size: $card-title-font-size;
+    line-height: $card-title-line-height;
+    margin-top: 0;
+}
+
+
+
+/* Dropdown
+   ================================================== */ 
+
+// .ap-card-dropdown{
+//     position: absolute !important;
+//     top: 15px!important;
+//     right: 25px!important;
+// }
+
+.ap-card-dropdown{
+    float: right;
+    position: relative;
+    top: 15px;
+    right: 25px;
+}
+
+.ap-card-dropdown i{
+    color: color(muted);
+    cursor: pointer;
+    transition: all 0.15s linear;
+}
+
+.ap-card-dropdown:hover i{
+    color: color(default);
+}
+
+
+// .ap-card-media-dropdown{
+//     position: absolute;
+//     top: 15px;
+//     right: 25px;
+//     cursor: pointer;
+// }
+
+// .ap-card-media-dropdown > .ap-card-dropdown{
+//     top: 0;
+//     right: 0;
+// }
+
+/* Badge
+   ================================================== */ 
+
+.ap-card-badge{
+    position: absolute;
+    top: $card-badge-top;
+    right: $card-badge-right;
+    z-index: 1;
+}
+
+.ap-card-badge-left{
+    right: auto;
+    left: $card-badge-right;
+}
+
+/*
+ * Remove margin from adjacent element
+ */
+
+.ap-card-badge:first-child + *{
+    margin-top: 0;
+}
+
+
+
+/* Hover modifier
+   ================================================== */ 
+
+.ap-card-hover:not(.ap-card-default):not(.ap-card-primary):not(.ap-card-secondary):hover{
+    box-shadow: box-shadow(large);
+}
+
+
+
+/* Style modifiers
+   ================================================== */
+
+/*
+ * Primary
+ */
+ .ap-card-default{
+    background-color: $card-default-background;
+    color: $card-default-color;
+    border: 0.5px solid #E5E5E5;
+    box-shadow: none !important;
+}
+
+.ap-card-default .ap-card-title{
+    color: $card-default-color;
+}
+
+.ap-card-default.ap-card-hover:hover{
+    box-shadow: box-shadow(large);
+}
+
+/*
+ * Primary
+ */
+.ap-card-primary{
+    background-color: $card-primary-background;
+    color: $card-primary-color;
+    box-shadow: box-shadow(small)
+}
+
+.ap-card-primary .ap-card-title{
+    color: $card-primary-color;
+}
+
+.ap-card-primary.ap-card-hover:hover{
+    box-shadow: box-shadow(large);
+}
+
+/*
+ * Secondary
+ */
+ .ap-card-secondary{
+    background-color: $card-secondary-background;
+    color: $card-secondary-color;
+    box-shadow: box-shadow(small)
+}
+
+.ap-card-secondary .ap-card-title{
+    color: $card-secondary-color;
+}
+
+.ap-card-secondary.ap-card-hover:hover{
+    box-shadow: box-shadow(large);
+}
+
+/*
+ * Success
+ */
+ .ap-card-success{
+    background-color: $card-success-background;
+    color: $card-success-color;
+    box-shadow: box-shadow(small)
+}
+
+.ap-card-success .ap-card-title{
+    color: $card-success-color;
+}
+
+.ap-card-success.ap-card-hover:hover{
+    box-shadow: box-shadow(large);
+}
+
+/*
+ * Warning
+ */
+ .ap-card-warning{
+    background-color: $card-warning-background;
+    color: $card-warning-color;
+    box-shadow: box-shadow(small)
+}
+
+.ap-card-warning .ap-card-title{
+    color: $card-warning-color;
+}
+
+.ap-card-warning.ap-card-hover:hover{
+    box-shadow: box-shadow(large);
+}
+
+/*
+ * Danger
+ */
+ .ap-card-danger{
+    background-color: $card-danger-background;
+    color: $card-danger-color;
+    box-shadow: box-shadow(small)
+}
+
+.ap-card-danger .ap-card-title{
+    color: $card-danger-color;
+}
+
+.ap-card-danger.ap-card-hover:hover{
+    box-shadow: box-shadow(large);
+}
+
+/*
+ * Orange
+ */
+ .ap-card-orange{
+    background-color: $card-orange-background;
+    color: $card-orange-color;
+    box-shadow: box-shadow(small)
+}
+
+.ap-card-orange .ap-card-title{
+    color: $card-orange-color;
+}
+
+.ap-card-orange.ap-card-hover:hover{
+    box-shadow: box-shadow(large);
+}
+
+/*
+ * Pink
+ */
+ .ap-card-pink{
+    background-color: $card-pink-background;
+    color: $card-pink-color;
+    box-shadow: box-shadow(small)
+}
+
+.ap-card-pink .ap-card-title{
+    color: $card-pink-color;
+}
+
+.ap-card-orange.ap-card-hover:hover{
+    box-shadow: box-shadow(large);
+}
+
+/* Size modifiers
+   ================================================== */ 
+
+.ap-card-xsmall.ap-card-body,
+.ap-card-xsmall .ap-card-body{
+    padding: $card-xsmall-body-padding-vertical $card-xsmall-body-padding-horizontal;
+}
+
+.ap-card-xsmall .ap-card-header{
+    padding: $card-xsmall-header-padding-vertical $card-xsmall-header-padding-horizontal;
+}
+
+.ap-card-xsmall .ap-card-footer{
+    padding: $card-small-footer-padding-vertical $card-xsmall-footer-padding-horizontal;
+}
+
+.ap-card-small.ap-card-body,
+.ap-card-small .ap-card-body{
+    padding: $card-small-body-padding-vertical $card-small-body-padding-horizontal;
+}
+
+.ap-card-small .ap-card-header{
+    padding: $card-small-header-padding-vertical $card-small-header-padding-horizontal;
+}
+
+.ap-card-small .ap-card-footer{
+    padding: $card-small-footer-padding-vertical $card-small-footer-padding-horizontal;
+}
+
+/*
+ * Medium
+ */
+
+/* Desktop and bigger */
+@include respond-to(medium){
+    .ap-card-medium.ap-card-body,
+    .ap-card-medium .ap-card-body{
+        padding: $card-medium-body-padding-vertical $card-medium-body-padding-horizontal;
+    }
+
+    .ap-card-medium .ap-card-header{
+        padding: $card-medium-header-padding-vertical $card-medium-header-padding-horizontal;
+    }
+
+    .ap-card-medium .ap-card-footer{
+        padding: $card-medium-footer-padding-vertical $card-medium-footer-padding-horizontal;
+    }
+}
+/*
+ * Large
+ */
+
+/* Desktop and bigger */
+@include respond-to(large){
+    .ap-card-large.ap-card-body,
+    .ap-card-large .ap-card-body{
+        padding: $card-large-body-padding-vertical-l $card-large-body-padding-horizontal-l;
+    }
+
+    .ap-card-large .ap-card-header{
+        padding: $card-large-header-padding-vertical-l $card-large-header-padding-horizontal-l;
+    }
+
+    .ap-card-large .ap-card-footer{
+        padding: $card-large-footer-padding-vertical-l $card-large-footer-padding-horizontal-l;
+    }
+}
+
+.ap-card-primary-light{
+    background-color: transparentize(color(primary), 0.9);
+}
+
+.ap-card-scroll {
+    min-height: 50vh;
+    overflow: hidden;
+}
+.ap-card-scroll:hover {
+    overflow-y: scroll;
+}
+
+.ap-card-content {
+    min-height: 80vh;
+}
+
+.ap-card-white {
+    background: #fff;
+}
+.ap-card-selected {
+    background: $card-default-hover-background;
+}

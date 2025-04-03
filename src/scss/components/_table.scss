@@ -1,0 +1,428 @@
+// Name:            Table
+// Description:     Styles for table
+//
+// Component:       `ap-table`
+//
+// Modifiers:       `ap-table-middle`
+//                  `ap-table-divider`
+//                  `ap-table-striped`
+//                  `ap-table-hover`
+//                  `ap-table-small`
+//                  `ap-table-justify`
+//                  `ap-table-shrink`
+//                  `ap-table-expand`
+//                  `ap-table-link`
+//                  `ap-table-responsive`
+//
+// States:          `ap-active`
+//
+// ========================================================================
+
+// Variables
+// ========================================================================
+
+$table-margin-vertical:                         margin(global)!default;
+
+$table-cell-padding-vertical:                   16px !default;
+$table-cell-padding-horizontal:                 12px !default;
+
+$table-header-cell-font-size:                   font(font-size) !default;
+$table-header-cell-font-weight:                 bold !default;
+$table-header-cell-color:                       color(default) !default;
+
+$table-footer-font-size:                        font-size(small) !default;
+
+$table-caption-font-size:                       font-size(small) !default;
+$table-caption-color:                           color(muted) !default;
+
+$table-row-active-background:                   #FFD !default;
+
+$table-divider-border-width:                    0.235px !default;
+$table-divider-border:                          border(border-color) !default;
+
+$table-striped-row-background:                  $global-muted-background !default;
+
+$table-hover-row-background:                    $table-row-active-background !default;
+
+$table-small-cell-padding-vertical:             10px !default;
+$table-small-cell-padding-horizontal:           12px !default;
+
+$table-large-cell-padding-vertical:             22px !default;
+$table-large-cell-padding-horizontal:           12px !default;
+
+$table-expand-min-width:                        150px !default;
+
+
+
+/* ==================================================
+    Component: Table
+   ================================================== */  
+
+/*
+ * 1. Remove most spacing between table cells.
+ * 2. Behave like a block element
+ * 3. Style
+ */
+
+.ap-table{
+    /* 1 */
+    border-collapse: collapse;
+    border-spacing: 0;
+    /* 2 */
+    width: 100%;
+    /* 3 */
+    margin-bottom: $table-margin-vertical;
+}
+
+/* Add margin if adjacent element */
+* + .ap-table{
+    margin-top: $table-margin-vertical;
+}
+
+
+
+/* Header cell
+   ================================================== */
+
+/*
+ * 1. Style
+ */
+.ap-table th{
+    padding: $table-cell-padding-vertical $table-cell-padding-horizontal;
+    text-align: left;
+    vertical-align: bottom;
+    /* 1 */
+    font-size: $table-header-cell-font-size;
+    font-weight: $table-header-cell-font-weight;
+    color: $table-header-cell-color;
+}
+
+
+
+/* Cell
+   ================================================== */
+
+.ap-table td{
+    padding: $table-cell-padding-vertical $table-cell-padding-horizontal;
+    vertical-align: top;
+    color: color(default);
+    font-weight: lighter;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.ap-table td > :last-child{
+    margin-bottom: 0;
+}
+
+
+
+/* Footer
+   ================================================== */
+
+.ap-table tfoot{
+    font-size: $table-footer-font-size;
+}
+
+
+
+/* Caption
+   ================================================== */
+
+.ap-table caption{
+    font-size: $table-caption-font-size;
+    text-align: left;
+    color: $table-caption-color;
+}
+
+
+
+/* Alignment modifier
+   ================================================== */
+
+.ap-table-middle,
+.ap-table-middle td{
+    vertical-align: middle !important;
+}
+
+
+
+/* Style modifier
+   ================================================== */
+
+/*
+ * Divider
+ */
+
+.ap-table-divider > tr:not(:first-child),
+.ap-table-divider > :not(:first-child) > tr,
+.ap-table-divider > :first-child > tr:not(:first-child){
+    border-top: $table-divider-border-width solid $table-divider-border
+}
+ 
+
+
+/*
+ * Striped
+ */
+
+.ap-table-striped > tr:nth-of-type(odd),
+.ap-table-striped tbody tr:nth-of-type(odd){
+    background: $table-striped-row-background;
+}
+
+
+
+/*
+ * Hover
+ */
+
+.ap-table-hover > tr:hover,
+.ap-table-hover tbody tr:hover{
+    background: $table-hover-row-background;
+}
+
+
+
+/* Activate state
+   ================================================== */
+
+.ap-table > tr.ap-active,
+.ap-table tbody tr.ap-active{
+    background: $table-row-active-background;
+}
+
+
+
+/* Size modifier
+   ================================================== */
+
+.ap-table-small th,
+.ap-table-small td{
+    padding: $table-small-cell-padding-vertical $table-small-cell-padding-horizontal;
+}
+
+.ap-table-large th,
+.ap-table-large td{
+    padding: $table-large-cell-padding-vertical $table-large-cell-padding-horizontal;
+}
+
+
+
+/* Justify modifier
+   ================================================== */
+
+.ap-table-justify th:first-child,
+.ap-table-justify td:first-child{
+    padding-left: 0;
+}
+
+.ap-table-justify th:last-child,
+.ap-table-justify td:last-child{
+    padding-right: 0;
+}
+
+
+
+/* Cell size modifier
+   ================================================== */
+
+.ap-table-shrink{
+    width: 1px
+}
+
+.ap-table-expand{
+   min-width: $table-expand-min-width;
+}
+
+
+
+/* Cell link modifier
+   ================================================== */
+
+/*
+ * Does not work with `uk-table-justify` at the moment
+ */
+
+.ap-table-link{
+    padding: 0 !important;
+}
+
+.ap-table-link > a{
+    display: block;
+    padding: $table-cell-padding-vertical $table-cell-padding-horizontal;
+}
+
+.ap-table-small .ap-table-link > a{
+    padding: $table-small-cell-padding-vertical $table-small-cell-padding-horizontal;
+}
+
+
+@include respond-to-max(small){
+
+    .ap-table-responsive,
+    .ap-table-responsive tbody,
+    .ap-table-responsive th,
+    .ap-table-responsive td,
+    .ap-table-responsive tr{
+        display: block;
+    }
+
+    .ap-table-responsive thead{
+        display: none;
+    }
+
+    .ap-table-responsive th,
+    .ap-table-responsive td{
+        width: auto !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        overflow: visible !important;
+        white-space: normal !important;
+    }
+
+    .ap-table-responsive th:not(:first-child):not(.ap-table-link),
+    .ap-table-responsive td:not(:first-child):not(.ap-table-link),
+    .ap-table-responsive .ap-table-link:not(:first-child) > a{
+        padding-top: calc($table-cell-padding-vertical / 3) !important;
+    }
+
+    .ap-table-responsive th:not(:last-child):not(.ap-table-link),
+    .ap-table-responsive td:not(:last-child):not(.ap-table-link),
+    .ap-table-responsive .ap-table-link:not(:last-child) > a{
+        padding-bottom: calc($table-cell-padding-vertical / 3) !important;
+    }
+
+    .ap-table-justify.ap-table-responsive th,
+    .ap-table-justify.ap-table-responsive td{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+}
+
+
+
+/* Table to card
+   ================================================== */
+
+@include respond-to-max(small){
+
+    .ap-table.ap-table-to-card thead{
+        display: none;
+    }
+
+    .ap-table.ap-table-to-card tr{
+        width: 100%;
+        display: block;
+        background: #FFFFFF;
+        box-shadow: box-shadow(small);
+
+        position: relative;
+        box-sizing: border-box;
+
+        border-radius: border(border-radius);
+        transition: all 0.3s ease;
+
+        border: border(border-width) solid border(border-color);
+        // padding: gutter(small);
+        margin: gutter(small) 0px;
+    }
+
+    .ap-table.ap-table-to-card tr:first-child{
+        margin-top: 0px;
+    }
+
+    /*
+     * Micro clearfix
+     */
+    .ap-table.ap-table-to-card tr{
+        @include clearfix;
+    }
+
+    .ap-table.ap-table-to-card tr td.ap-table-to-card-image{
+        padding: 0px;
+    }
+
+    .ap-table.ap-table-to-card tr td.ap-table-to-card-image .ap-avatar{
+        height: 300px;
+        width: 100%;
+        
+        & img{
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            filter: brightness(80%);
+        }
+
+        & img.ap-border-circle{
+            border-radius: 0px !important;
+        }
+    }
+
+    .ap-table.ap-table-to-card tr td .ap-avatar-border,
+    .ap-table.ap-table-to-card tr td .ap-placeholder-image{
+        border-radius: 0px;
+        border: 0px;
+        padding: 0px;
+        margin: 0px!important;
+
+        & img{
+            padding: 0;
+        }
+    }
+
+    .ap-table.ap-table-to-card tr td.ap-table-to-card-title{
+        display: inline-block;
+
+        font-size: font-size(large);
+        font-weight: bold;
+        line-height: font-size(large);
+        margin-top: 12px;
+    }
+
+    .ap-table.ap-table-to-card tr td .ap-table-card-label{
+        display: block;
+        font-size: font-size(small);
+        font-weight: 600;
+    }
+
+    .ap-table.ap-table-to-card tr td{
+        display: block;
+        padding: margin(small) gutter(small);
+    }
+
+    .ap-table.ap-table-to-card tr td.ap-table-to-card-option{
+        padding: 0px;
+        margin-bottom: 12px;
+    }
+
+    .ap-table.ap-table-to-card tr td:not(.ap-table-to-card-image):not(.ap-table-to-card-title):not(:last-child):not(.ap-table-to-card-remove-border){
+        border-bottom: border(border-width) solid border(border-color);
+    }
+
+    .ap-table.ap-table-to-card tr td.ap-table-to-card-option > [ap-dropdown]{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .ap-table.ap-table-to-card tr td .ap-split-content{
+        display: flex;
+        align-items: center;
+        align-content: center;
+
+        & div{
+            flex: 1;
+        }
+
+        & div:last-child{
+            text-align: right;
+        }
+    }
+}
+
+.ap-table-card-label{
+    display: none;
+}

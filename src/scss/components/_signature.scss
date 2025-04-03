@@ -1,0 +1,127 @@
+// Name:            Avatar
+// Description:     Component to create avatar
+//
+// Component:       `ap-signature`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+$signature-default:                                    #E5E5E5 !default;
+$signature-primary:                                    color(primary) !default;
+$signature-primary-color:                              color(inverse) !default;
+$signature-secondary:                                  color(secondary) !default;
+$signature-secondary-color:                            color(secondary) !default;
+
+$signature-height:                                     130px !default;
+$signature-width:                                      280px !default;
+$signature-line-height:                                $signature-height !default;
+$signature-font-size:                                  16px !default;
+
+
+/* ==================================================
+    Component: Avatar
+   ================================================== */   
+
+/*
+ * 1. Dimension
+ * 2. Display `inline-block` to make a row when you have multiple avatar
+ * 2. Style
+ */
+
+.ap-signature{
+    /* 1 */
+    height: $signature-height;
+    width: $signature-width;
+    /* 2 */
+    display: inline-block;
+    /* 3 */
+    color: color-yiq($signature-default); 
+    font-size: $signature-font-size;
+    background-color: $signature-default;
+    border-radius: border(border-radius);
+    text-align: center;
+    overflow: hidden;
+
+    transition: all 0.4s ease-in-out;
+}
+
+/*
+ * Center content
+ */
+ .ap-signature > .ap-signature-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ap-signature > *{
+    height: 100%;
+    vertical-align: middle;
+}
+
+
+.ap-signature.ap-signature-image{
+    line-height: 0;
+}
+
+.ap-signature-image > img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* Child
+   ================================================== */
+
+/*
+ * Display both elements on each row
+ */
+.ap-signature-label,
+.ap-signature-sublabel{
+    display: block;
+}
+
+/*
+ * Set the sublabel font-size with any
+ * size of the avatar
+ */
+.ap-signature[class*="ap-signature-"] .ap-signature-sublabel{
+    font-size: 10px;
+}
+
+.ap-signature.ap-signature-circle {
+    border-radius: 100%;
+}
+
+.ap-signature.ap-signature-outline {
+    border: 1px solid;
+    background: none;
+}
+
+.ap-signature-outline-inverse {
+    border: 5px solid white;
+    background: none;
+}
+
+.ap-signature-outline-primary {
+    border: 1px solid $signature-primary;
+    background: none;
+}
+
+.ap-signature.ap-active {
+    border: 1px solid;
+    background-color: color(primary);
+    color: white;
+}
+
+.ap-signature-outline-semi-rounded {
+    border-radius: 20px !important;
+}
+
+.ap-signature-outline-full-rounded {
+    border-radius: 100px !important;
+}

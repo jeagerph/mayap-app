@@ -1,0 +1,232 @@
+// Name:            Avatar
+// Description:     Component to create avatar
+//
+// Component:       `ap-avatar`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+$avatar-default:                                    #E5E5E5 !default;
+$avatar-primary:                                    color(primary) !default;
+$avatar-primary-color:                              color(inverse) !default;
+$avatar-secondary:                                  color(secondary) !default;
+$avatar-secondary-color:                            color(secondary) !default;
+
+$avatar-height-xs:                                  24px !default;
+$avatar-width-xs:                                   $avatar-height-xs !default;
+$avatar-line-height-xs:                             $avatar-height-xs !default;
+$avatar-font-size-xs:                               10px !default;
+
+$avatar-height-s:                                   32px !default;
+$avatar-width-s:                                    $avatar-height-s !default;
+$avatar-line-height-s:                              $avatar-height-s !default;
+$avatar-font-size-s:                                12px !default;
+
+$avatar-height:                                     48px !default;
+$avatar-width:                                      $avatar-height !default;
+$avatar-line-height:                                $avatar-height !default;
+$avatar-font-size:                                  16px !default;
+
+$avatar-height-m:                                   64px !default;
+$avatar-width-m:                                    $avatar-height-m !default;
+$avatar-line-height-m:                              $avatar-height-m !default;
+$avatar-font-size-m:                                20px !default;
+
+$avatar-height-l:                                   96px !default;
+$avatar-width-l:                                    $avatar-height-l !default;
+$avatar-line-height-l:                              $avatar-height-l !default;
+$avatar-font-size-l:                                36px !default;
+
+$avatar-height-xl:                                  128px !default;
+$avatar-width-xl:                                   $avatar-height-xl !default;
+$avatar-line-height-xl:                             $avatar-height-xl !default;
+$avatar-font-size-xl:                               48px !default;
+
+$avatar-height-xxl:                                  160px !default;
+$avatar-width-xxl:                                   $avatar-height-xxl !default;
+$avatar-line-height-xxl:                             $avatar-height-xxl !default;
+$avatar-font-size-xxl:                               60px !default;
+
+
+/* ==================================================
+    Component: Avatar
+   ================================================== */   
+
+/*
+ * 1. Dimension
+ * 2. Display `inline-block` to make a row when you have multiple avatar
+ * 2. Style
+ */
+
+.ap-avatar{
+    /* 1 */
+    height: $avatar-height;
+    width: $avatar-width;
+    /* 2 */
+    display: inline-block;
+    /* 3 */
+    color: color-yiq($avatar-default); 
+    font-size: $avatar-font-size;
+    background-color: $avatar-default;
+    border-radius: border(border-radius);
+    text-align: center;
+    overflow: hidden;
+
+    transition: all 0.4s ease-in-out;
+}
+
+/*
+ * Center content
+ */
+ .ap-avatar > .ap-avatar-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ap-avatar > *{
+    height: 100%;
+    vertical-align: middle;
+}
+
+
+.ap-avatar.ap-avatar-image{
+    line-height: 0;
+}
+
+.ap-avatar-image > img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
+/* Style modifiers
+   ================================================== */
+
+.ap-avatar-primary{
+    background-color: $avatar-primary;
+    color: $avatar-primary-color;
+}
+
+.ap-avatar-secondary{
+    background-color: $avatar-secondary;
+    color: $avatar-secondary-color;
+}
+
+
+
+/* Size modifiers
+   ================================================== */
+
+.ap-avatar-xsmall{
+    height: $avatar-height-xs;
+    width: $avatar-width-xs;
+}
+
+.ap-avatar-small{
+    height: $avatar-height-s;
+    width: $avatar-width-s;
+}
+
+.ap-avatar-medium{
+    height: $avatar-height-m;
+    width: $avatar-width-m;
+}
+
+.ap-avatar-large{
+    height: $avatar-height-l;
+    width: $avatar-width-l;
+}
+
+.ap-avatar-xlarge{
+    height: $avatar-height-xl;
+    width: $avatar-width-xl;
+}
+
+.ap-avatar-xxlarge{
+    height: $avatar-height-xxl;
+    width: $avatar-width-xxl;
+}
+
+
+/* Child
+   ================================================== */
+
+/*
+ * Display both elements on each row
+ */
+.ap-avatar-label,
+.ap-avatar-sublabel{
+    display: block;
+}
+
+
+.ap-avatar.ap-avatar-xsmall .ap-avatar-label{
+    font-size: $avatar-font-size-xs;
+}
+
+.ap-avatar.ap-avatar-small .ap-avatar-label{
+    font-size: $avatar-font-size-s;
+}
+
+.ap-avatar.ap-avatar-medium .ap-avatar-label{
+    font-size: $avatar-font-size-m;
+}
+
+.ap-avatar.ap-avatar-large .ap-avatar-label{
+    font-size: $avatar-font-size-l;
+}
+
+.ap-avatar.ap-avatar-xlarge .ap-avatar-label{
+    font-size: $avatar-font-size-xl;
+}
+
+.ap-avatar.ap-avatar-xxlarge .ap-avatar-label{
+    font-size: $avatar-font-size-xxl;
+}
+
+/*
+ * Set the sublabel font-size with any
+ * size of the avatar
+ */
+.ap-avatar[class*="ap-avatar-"] .ap-avatar-sublabel{
+    font-size: 10px;
+}
+
+.ap-avatar.ap-avatar-circle {
+    border-radius: 100%;
+}
+
+.ap-avatar.ap-avatar-outline {
+    border: 1px solid;
+    background: none;
+}
+
+.ap-avatar-outline-inverse {
+    border: 5px solid white;
+    background: none;
+}
+
+.ap-avatar-outline-primary {
+    border: 1px solid $avatar-primary;
+    background: none;
+}
+
+.ap-avatar.ap-active {
+    border: 1px solid;
+    background-color: color(primary);
+    color: white;
+}
+
+.ap-avatar-outline-semi-rounded {
+    border-radius: 20px !important;
+}
+
+.ap-avatar-outline-full-rounded {
+    border-radius: 100px !important;
+}

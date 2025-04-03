@@ -1,0 +1,54 @@
+.ap-splashscreen{
+    /* 1 */
+    height: 100vh;
+    width: 100%;
+    /* 2 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 3 */
+    animation-name: splash-in;
+    animation-duration: 1s;
+    transition: all 1s ease-out;
+}
+
+@keyframes splash-in{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+
+.ap-splashscreen .ap-splashscreen-logo{
+    height: 100px;
+    width: 100px;
+
+    animation-name: breath-logo;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes breath-logo{
+    15%{
+        transform: scale(1);
+    }
+
+    25%{
+        transform: scale(1.1);
+    }
+
+    50%{
+        transform: scale(1);
+    }
+
+    75%{
+        transform: scale(1.1);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}

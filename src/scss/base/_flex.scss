@@ -1,0 +1,219 @@
+//  Name:            Flex
+//  Description:     Utilities for flex
+//
+//  Component:       `ap-flex-*`
+//
+// ========================================================================
+
+/* ========================================================================
+   Component: Flex
+ ========================================================================== */
+
+ .ap-flex{
+    display: flex;
+}
+
+.ap-flex-inline{
+    display: inline-flex;
+}
+
+/*
+ * Remove pseudo elements created by micro clearfix as precautions
+ */
+
+.ap-flex::before,
+.ap-flex::after,
+.ap-flex-inline::before,
+.ap-flex-inline::after{
+    display: none;
+}
+
+
+
+/* Alignment
+ ========================================================================== */
+
+/*
+ * Align items along the main axis of the current line of the flex container.
+ * Row: Horizontal
+ */
+
+@include create-flex-alignment;
+
+/*
+ * Align items in the cross of the current line of the flex container
+ * Row: Vertical
+ */
+
+
+// Default
+
+.ap-flex-stretch{
+    align-items: stretch;
+}
+
+.ap-flex-top{
+    align-items: flex-start;
+}
+
+.ap-flex-middle{
+    align-items: center;
+}
+
+.ap-flex-bottom{
+    align-items: flex-end;
+}
+
+
+
+/* Direction
+ ========================================================================== */
+
+.ap-flex-row{
+    flex-direction: row;
+}
+
+.ap-flex-row-reverse{
+    flex-direction: row-reverse;
+}
+
+.ap-flex-column{
+    flex-direction: column;
+}
+
+.ap-flex-column-reverse{
+    flex-direction: column-reverse;
+}
+
+
+
+/* Wrap
+ ========================================================================== */
+
+// Default
+.ap-flex-nowrap{
+    flex-wrap: nowrap;
+}
+
+.ap-flex-wrap{
+    flex-wrap: wrap;
+}
+
+.ap-flex-wrap-reverse{
+    flex-wrap: wrap-reverse;
+}
+
+// Default
+.ap-flex-wrap-stretch{ 
+    align-content: stretch; 
+}
+
+.ap-flex-wrap-top{ 
+    align-content: flex-start; 
+}
+
+.ap-flex-wrap-middle{ 
+    align-content: center; 
+}
+
+.ap-flex-wrap-bottom{ 
+    align-content: flex-end; 
+}
+
+.ap-flex-wrap-between{
+    align-content: space-between;
+}
+
+.ap-flex-wrap-around{
+    align-content: space-around;
+}
+
+
+
+/* Item Ordering
+ ========================================================================== */
+
+.ap-flex-first{
+    order: -1;
+}
+
+.ap-flex-last{
+    order: 99;
+}
+
+@include respond-to(small){
+    .ap-flex-first\@s{
+        order: -1;
+    }
+    
+    .ap-flex-last\@s{
+        order: 99;
+    }
+}
+
+@include respond-to(medium){
+    .ap-flex-first\@m{
+        order: -1;
+    }
+    
+    .ap-flex-last\@m{
+        order: 99;
+    }
+}
+
+@include respond-to(large){
+    .ap-flex-first\@l{
+        order: -1;
+    }
+    
+    .ap-flex-last\@l{
+        order: 99;
+    }
+}
+
+@include respond-to(xlarge){
+    .ap-flex-first\@xl{
+        order: -1;
+    }
+    
+    .ap-flex-last\@xl{
+        order: 99;
+    }
+}
+
+
+
+/* Item Dimensions
+ ========================================================================== */
+
+/*
+ * Initial: 0 1 auto
+ * Content dimensions, but shrinks
+ */
+
+/*
+ * No flex: 0 0 auto
+ * Content dimensions
+ */
+
+.ap-flex-none{
+    flex: none;
+}
+
+/*
+ * Relative flex 1 1 auto
+ * Space is allocated considering content
+ */
+
+.ap-flex-auto{
+    flex: auto;
+}
+
+/*
+ * Absolute Flex: 1 1 0%
+ * Space is allocated solely based on flex
+ */
+
+.ap-flex-1{
+    flex: 1;
+}

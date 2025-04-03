@@ -1,0 +1,383 @@
+// Name:            Modal
+// Description:     Component to create modal dialogs
+//
+// Component:       `ap-modal`
+//
+// Sub-objects:     `ap-modal-page`
+//                  `ap-modal-dialog`
+//                  `ap-modal-header`
+//                  `ap-modal-body`
+//                  `ap-modal-footer`
+//                  `ap-modal-title`
+//                  `ap-modal-close`
+//
+// Adopted:         `ap-modal-close-default`
+//                  `ap-modal-close-outside`
+//                  `ap-modal-close-full`
+//
+// Modifiers:       `ap-modal-container`
+//                  `ap-modal-full`
+//
+// States:          `ap-open`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$modal-z-index:                                     layer(modal) !default;
+$modal-background:                                  rgba(0, 0, 0, 0.6) !default;
+$modal-solid-background:                            color(secondary) !default;
+
+$modal-padding-horizontal:                          15px !default;
+$modal-padding-horizontal-s:                        gutter(small) !default;
+$modal-padding-horizontal-m:                        gutter(medium) !default;
+$modal-padding-vertical:                            $modal-padding-horizontal !default;
+$modal-padding-vertical-s:                          50px !default;
+
+$modal-dialog-width-s:                              500px !default;
+
+$modal-dialog-width:                                600px !default;
+$modal-dialog-background:                           color(inverse) !default;
+
+$modal-container-width:                             1200px !default;
+
+$modal-body-padding-horizontal:                     gutter(small) !default;
+$modal-body-padding-vertical:                       gutter(small) !default;
+
+
+$modal-header-padding-horizontal:                   gutter(small) !default;
+$modal-header-padding-vertical:                     calc($modal-header-padding-horizontal / 2) !default;
+$modal-header-background:                           color(inverse) !default;
+
+$modal-footer-padding-horizontal:                   gutter(small) !default;
+$modal-footer-padding-vertical:                     calc($modal-footer-padding-horizontal / 2) !default;
+$modal-footer-background:                           #F8F8F8 !default;
+
+$modal-title-font-size:                             font-size(large) !default;
+$modal-title-font-size-s:                           font-size(medium) !default;
+$modal-title-font-weight:                           font-weight(bold) !default;
+$modal-title-line-height:                           font(line-height) !default;
+$modal-title-color:                                 color(emphasis) !default;
+
+$modal-close-position:                              margin(small) !default;
+$modal-close-padding:                               5px !default;
+
+$modal-close-outside-position:                      0 !default;
+$modal-close-outside-translate:                     100% !default;
+$modal-close-outside-color:                         darken(color(inverse), 20%) !default;
+$modal-close-outside-hover-color:                   color(inverse) !default;
+
+
+
+/* ==================================================
+    Component: Modal
+   ================================================== */
+
+/*
+ * 1. Hide by default
+ * 2. Set position
+ * 3. Allow scrolling for the modal dialog
+ * 4. Horizontal padding
+ * 5. Mask the background-page
+ * 6. Fade-in transition
+ */
+
+.ap-modal{
+    /* 1 */
+    display: none;
+    /* 2 */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: $modal-z-index;
+    /* 3 */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* 4 */
+    padding: $modal-padding-vertical $modal-padding-horizontal;
+    /* 5 */
+    background: $modal-background;
+    /* 6 */
+    opacity: 0;
+    transition: opacity 0.15s linear !important;
+}
+
+// Search modal modification
+.ap-modal.ap-search-modal{
+    background: color(inverse);
+}
+
+/* Phone landscape and bigger */
+@include respond-to(small){
+    .ap-modal{
+        padding: $modal-padding-vertical-s $modal-padding-horizontal-s;
+    }
+}
+
+/* Tablet landscape and bigger */
+@include respond-to(medium){
+    .ap-modal{
+        padding-left: $modal-padding-horizontal-m;
+        padding-right: $modal-padding-horizontal-m;
+    }
+}
+
+/*
+ * Open
+ */
+
+.ap-modal.ap-open{
+    opacity: 1;
+}
+
+/*
+ * Display
+ */
+
+.ap-modal.ap-modal-flex
+{
+    display: flex;
+}
+
+.ap-modal.ap-modal-block{
+    display: block;
+}
+
+
+
+/* Page
+   ================================================== */
+
+/*
+ * Prevent scrollbars
+ */
+
+.ap-modal-page{
+    overflow: hidden;
+}
+
+
+
+/* Dialog
+   ================================================== */
+
+/*
+ * 1. Create position contex for spinner and close button
+ * 2. Dimensions
+ * 3. Fix `max-width: 100%` not working in combination with flex and responsive images in IE11
+ *    `!important` needed to overwrite `ap-width-auto`. See `#modal-media-image` in tests
+ * 4. Style
+ * 5. Slide-in transition
+ */
+
+.ap-modal-dialog{
+    /* 1 */
+    position: relative;
+    /* 2 */
+    box-sizing: border-box;
+    border-radius: 0.235rem;
+    margin: 0 auto;
+    width: $modal-dialog-width;
+    /* 3 */
+    max-width: unquote('calc(100% - 0.01px)') !important;
+    /* 4 */
+    background: $modal-dialog-background; 
+    /* 5 */
+    opacity: 0;
+    transform: translateY(-100px);
+    transition: 0.3s linear;
+    transition-property: opacity, transform;
+}
+
+.ap-modal.ap-search-modal .ap-modal-dialog{
+    background: transparent;
+}
+
+/*
+ * Open
+ */
+
+.ap-open > .ap-modal-dialog{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+/* Size modifier
+   ================================================== */
+
+/*
+ * Container size
+ * Take the same size as the Container component
+ */
+
+.ap-modal-container .ap-modal-dialog{
+    width: $modal-container-width;
+}
+
+/*
+ * Full size
+ * 1. Remove the padding and background from modal
+ * 2. Reset all default declartion from modal dialog
+ */
+
+/* 1 */
+.ap-modal-full{
+    padding: 0;
+    background: none;
+}
+
+/* 2 */
+.ap-modal-full .ap-modal-dialog{
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    transform: translateY(0);
+}
+
+/*
+ * Small size
+ */
+
+.ap-modal-small .ap-modal-dialog{
+    width: $modal-dialog-width-s;
+}
+
+
+
+/* Sections
+   ================================================== */
+
+.ap-modal-body{
+    padding: $modal-body-padding-vertical $modal-body-padding-horizontal;
+}
+
+.ap-modal-header{
+    padding: $modal-header-padding-vertical $modal-header-padding-horizontal;
+    background: $modal-header-background;
+    border-top-left-radius: border(border-radius);
+    border-top-right-radius: border(border-radius);
+}
+
+.ap-modal-footer{
+    padding: $modal-footer-padding-vertical $modal-footer-padding-horizontal;
+    background: $modal-footer-background;
+    border-bottom-left-radius: border(border-radius);
+    border-bottom-right-radius: border(border-radius);
+}
+
+/*
+ * Micro clearfix
+ */
+
+.ap-modal-body,
+.ap-modal-header,
+.ap-modal-footer{
+    @include clearfix;
+}
+
+/*
+ * Remove margin from the last child
+ */
+
+.ap-modal-body > :last-child,
+.ap-modal-header > :last-child,
+.ap-modal-footer > :last-child{
+    margin-bottom: 0;
+}
+
+
+
+/* Title
+   ================================================== */
+
+.ap-modal-title{
+    color: $modal-title-color;
+    font-size: $modal-title-font-size;
+    line-height: $modal-title-line-height;
+    font-weight: $modal-title-font-weight;
+    margin: 0;
+}
+
+.ap-modal-small .ap-modal-title{
+    font-size: $modal-title-font-size-s;
+}
+
+
+/* Close
+ * Adopts `ap-close`
+   ================================================== */
+
+[class*='ap-modal-close']{
+    position: absolute;
+    top: $modal-close-position;
+    right: $modal-close-position;
+    padding: $modal-close-padding;
+}
+
+.ap-modal.ap-search-modal [class*='ap-modal-close']{
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    padding: $modal-close-padding;
+    z-index: $modal-z-index;
+}
+
+/*
+ * Remove margin from adjacent element
+ */
+
+[class*='ap-modal-close']:first-child + *{
+    margin-top: 0;
+}
+
+/*
+ * Outside
+ * 1. Prevent scrollbar on small devices
+ */
+
+.ap-modal-close-outside{
+    top: $modal-close-outside-position;
+
+    /* 1 */
+    right: (-$modal-close-outside-position);
+    transform: translate(0, -($modal-close-outside-translate));
+    color: $modal-close-outside-color;
+}
+
+.ap-modal-close-outside:hover{
+    color: $modal-close-outside-hover-color;
+}
+
+@include respond-to(medium){
+    /* 1 */
+    .ap-modal-close-outside{
+        right: $modal-close-outside-position;
+        transform: translate($modal-close-outside-translate, -($modal-close-outside-translate));
+    }
+}
+
+
+
+/*
+ * Full
+ */
+
+.ap-modal-close-full{
+    top: 0;
+    right: 0;
+    padding: 20px;
+    background: #FFFFFF;
+}
+
+
+.ap-modal-body-wrapper{
+    max-height: 400px;
+    overflow-y: auto;
+}

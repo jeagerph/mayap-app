@@ -1,0 +1,240 @@
+// Name:            Placeholder
+// Description:     Components to create placeholders
+//
+// Component:       `ap-placeholder-bar`
+//                  `ap-placeholder-file`
+//                  `ap-placeolder-image`
+//
+//
+// Modifiers:       `ap-placeholder-bar-xsmall`
+//                  `ap-placeholder-bar-small`
+//                  `ap-placeholder-bar-medium`
+//                  `ap-placeholder-bar-large`
+//
+//                  `ap-placeholder-file-xsmall`
+//                  `ap-placeholder-file-small`
+//                  `ap-placeholder-file-medium`
+//                  `ap-placeholder-file-large`
+//
+//                  `ap-placeholder-image-large`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$placeholder-border-radius:                         border(border-radius) !default;
+
+$placeholder-default-background:                    #dadada !default;
+$placeholder-default-color:                         color(default) !default;
+$placeholder-primary-background:                    color(primary) !default;
+$placeholder-primary-color:                         color(inverse) !default;
+
+
+$placeholder-bar-height-xs:                         10px !default;
+$placeholder-bar-height-s:                          16px !default;
+$placeholder-bar-height:                            24px !default;
+$placeholder-bar-height-m:                          36px !default;
+$placeholder-bar-height-l:                          46px !default;
+
+$placeholder-block-height-xs:                       100px !default;
+$placeholder-block-height-s:                        200px !default;
+$placeholder-block-height:                          300px !default;
+$placeholder-block-height-m:                        400px !default;
+$placeholder-block-height-l:                        500px !default;
+$placeholder-block-height-xl:                       600px !default;
+
+$placeholder-file-border-color:                     border(border-color) !default;
+
+$placeholder-file-height-xs:                        40px !default;
+$placeholder-file-height-s:                         60px !default;
+$placeholder-file-height:                           80px !default;
+$placeholder-file-height-m:                         100px !default;
+$placeholder-file-height-l:                         120px !default;
+$placeholder-file-height-xl:                        180px !default;
+
+$placeholder-image-height:                          control-height(medium) !default;
+$placeholder-image-width:                           $placeholder-image-height !default;
+$placeholder-image-line-height:                     $placeholder-image-height !default;
+
+$placeholder-image-height-l:                        control-height(medium) (+10px) !default;
+$placeholder-image-width-l:                         $placeholder-image-height-l !default;
+$placeholder-image-line-height-l:                   $placeholder-image-height-l !default;
+
+$placeholder-image-height-xl:                       100px !default;
+$placeholder-image-width-xl:                        $placeholder-image-height-xl !default;
+$placeholder-image-line-height-xl:                  $placeholder-image-height-xl !default;
+
+
+/* ==================================================
+    Component: Placeholder
+   ================================================== */  
+
+.ap-placeholder{
+    position: relative;
+    box-sizing: border-box;
+
+    border-radius: $placeholder-border-radius;
+    background-color: $placeholder-default-background;
+    color: $placeholder-default-color;
+
+    display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+}
+
+.ap-placeholder:first-child{
+    margin-left: 0px;
+}
+
+
+
+/* Style modifiers
+   ================================================== */
+.ap-placeholder-primary{
+    background-color: $placeholder-primary-background;
+    color: $placeholder-primary-color;
+}
+
+
+
+/* Bar
+ * Use in table data or card labels
+   ================================================== */ 
+
+.ap-placeholder-bar{
+    width: 100%;
+    height: $placeholder-bar-height;
+}
+
+/* Extra Small */
+.ap-placeholder-bar-xsmall{
+    height: $placeholder-bar-height-xs;
+}
+
+/* Small */
+.ap-placeholder-bar-small{
+    height: $placeholder-bar-height-s;
+}
+
+/* medium */
+.ap-placeholder-bar-medium{
+    height: $placeholder-bar-height-m;
+}
+
+/* large */
+.ap-placeholder-bar-large{
+    height: $placeholder-bar-height-l;
+}
+
+
+/* Block
+ * Use in map or big block
+   ================================================== */ 
+
+.ap-placeholder-block{
+    height: $placeholder-block-height;
+    width: inherit;
+}
+
+/* Extra Small */
+.ap-placeholder-block-xsmall{
+    height: $placeholder-block-height-xs;
+}
+
+/* Small */
+.ap-placeholder-block-small{
+    height: $placeholder-block-height-s;
+}
+
+/* Medium */
+.ap-placeholder-block-medium{
+    height: $placeholder-block-height-m;
+}
+
+/* Large */
+.ap-placeholder-block-large{
+    height: $placeholder-block-height-l;
+}
+
+/* Extra Large */
+.ap-placeholder-block-xlarge{
+    height: $placeholder-block-height-xl;
+}
+
+
+
+/* File
+ * Use in file or attachments
+   ================================================== */ 
+
+.ap-placeholder-file{
+    height: $placeholder-file-height;
+    width: 100%;
+
+    border-color: $placeholder-file-border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Extra Small */
+.ap-placeholder-file-xsmall{
+    height: $placeholder-file-height-xs;
+}
+
+/* Small */
+.ap-placeholder-file-small{
+    height: $placeholder-file-height-s;
+}
+
+/* Medium */
+.ap-placeholder-file-medium{
+    height: $placeholder-file-height-m;
+}
+
+/* Large */
+.ap-placeholder-file-large{
+    height: $placeholder-file-height-l;
+}
+
+/* Extra Large */
+.ap-placeholder-file-xlarge{
+    height: $placeholder-file-height-xl;
+}
+
+
+.ap-placeholder-file-inherit{
+    height: 100%;
+}
+
+
+
+/* Image
+ * Use in without images
+   ================================================== */ 
+
+.ap-placeholder-image{
+    height: $placeholder-image-height;
+    width: $placeholder-image-width;
+    line-height: $placeholder-image-line-height;
+    text-align: center;
+}
+
+.ap-placeholder-image-large{
+    height: $placeholder-image-height-l;
+    width: $placeholder-image-width-l;
+    line-height: $placeholder-image-line-height-l;
+}
+
+.ap-placeholder-image-xlarge{
+    height: $placeholder-image-height-xl;
+    width: $placeholder-image-width-xl;
+    line-height: $placeholder-image-height-xl;
+    font-size: font-size(large);
+}
+
+.ap-placeholder-image-circle{
+    border-radius: 100% !important;
+}

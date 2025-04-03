@@ -1,0 +1,56 @@
+// Name:            Chips
+// Description:     Component to create chip
+//
+// Component:       `ap-chips`
+//
+// Modifier:        `ap-label-default`
+//                  `ap-label-primary`
+//                  `ap-label-secondary`
+//                  `ap-label-success`
+//                  `ap-label-warning`
+//                  `ap-label-danger`
+//
+// ========================================================================
+
+// Variables
+// ========================================================================
+
+$chips-size:                                12px !default;
+
+$chips-padding-vertical:                    15px !default;
+$chips-padding-horizontal:                  15px !default;
+$chips-border-radius:                       500px !default;
+$chips-background:                          theme-color(unselected) !default;
+$chips-color:                               color(default) !default;
+$chips-font-size:                           font-size(small);
+
+$chips-hover-color:                         color(inverse) !default;
+
+/* ==================================================
+    Component: Chips
+   ================================================== */
+
+.ap-chips{
+    box-sizing: border-box;
+    min-width: $chips-size;
+    height: $chips-size;
+    padding: $chips-padding-vertical $chips-padding-horizontal;
+    border-radius: $chips-border-radius;
+    vertical-align: middle;
+    margin-left: 8px;
+    /* 1 */
+    background: $chips-background;
+    color: $chips-color;
+    font-size: $chips-font-size;
+    /* 2 */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ap-chips:hover,
+.ap-chips:focus{
+    color: $chips-hover-color;
+    text-decoration: none;
+    outline: none;
+}

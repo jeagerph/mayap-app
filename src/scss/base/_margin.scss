@@ -1,0 +1,340 @@
+// Name:            Margin
+// Description:     Utilities for margins
+//
+// Component:       `ap-margin-*`
+//                  `ap-margin-small-*`
+//                  `ap-margin-medium-*`
+//                  `ap-margin-large-*`
+//                  `ap-margin-xlarge-*`
+//                  `ap-margin-remove-*`
+//                  `ap-margin-auto-*`
+//                  `ap-margin-vertical-*`
+//                  `ap-margin-horizontal-*`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$margin-margin:                         margin(global) !default;
+
+$margin-xsmall-margin:                  margin(xsmall) !default;
+
+$margin-small-margin:                   margin(small) !default;
+
+$margin-medium-margin:                  margin(medium) !default;
+
+$margin-large-margin:                   margin(medium) !default;
+$margin-large-margin-l:                 margin(large) !default;
+
+$margin-xlarge-margin:                  margin(large) !default;
+$margin-xlarge-margin-l:                margin(xlarge) !default;
+
+
+
+/* ==================================================
+    Component: Margin
+   ================================================== */   
+
+
+/*
+ * Default
+ */
+
+.ap-margin{ 
+    margin-bottom: $margin-margin !important; 
+}
+
+* + .ap-margin{ 
+    margin-top: $margin-margin !important; 
+}
+
+.ap-margin-top{ 
+    margin-top: $margin-margin !important; 
+}
+
+.ap-margin-bottom{ 
+    margin-bottom: $margin-margin !important; 
+}
+
+.ap-margin-left{ 
+    margin-left: $margin-margin !important; 
+}
+
+.ap-margin-right{ 
+    margin-right: $margin-margin !important; 
+}
+
+
+
+/*
+ * Extra Small
+ */
+
+.ap-margin-xsmall{ 
+    margin-bottom: $margin-xsmall-margin !important; 
+}
+
+* + .ap-margin-xsmall{ 
+    margin-top: $margin-xsmall-margin !important; 
+}
+
+.ap-margin-xsmall-top{ 
+    margin-top: $margin-xsmall-margin !important; 
+}
+
+.ap-margin-xsmall-bottom{ 
+    margin-bottom: $margin-xsmall-margin !important; 
+}
+
+.ap-margin-xsmall-left{ 
+    margin-left: $margin-xsmall-margin !important; 
+}
+
+.ap-margin-xsmall-right{ 
+    margin-right: $margin-xsmall-margin !important; 
+}
+
+
+
+/*
+ * Small
+ */
+
+.ap-margin-small{ 
+    margin-bottom: $margin-small-margin !important; 
+}
+
+* + .ap-margin-small{ 
+    margin-top: $margin-small-margin !important; 
+}
+
+.ap-margin-small-top{ 
+    margin-top: $margin-small-margin !important; 
+}
+
+.ap-margin-small-bottom{ 
+    margin-bottom: $margin-small-margin !important; 
+}
+
+.ap-margin-small-left{ 
+    margin-left: $margin-small-margin !important; 
+}
+
+.ap-margin-small-right{ 
+    margin-right: $margin-small-margin !important; 
+}
+
+
+
+/*
+ * Medium
+ */
+
+.ap-margin-medium{ 
+    margin-bottom: $margin-medium-margin !important; 
+}
+
+* + .ap-margin-medium{ 
+    margin-top: $margin-medium-margin !important; 
+}
+
+.ap-margin-medium-top{ 
+    margin-top: $margin-medium-margin !important; 
+}
+
+.ap-margin-medium-bottom{ 
+    margin-bottom: $margin-medium-margin !important; 
+}
+
+.ap-margin-medium-left{ 
+    margin-left: $margin-medium-margin !important; 
+}
+
+.ap-margin-medium-right{ 
+    margin-right: $margin-medium-margin !important; 
+}
+
+
+
+/*
+ * Large
+ */
+
+.ap-margin-large{ 
+    margin-bottom: $margin-large-margin !important; 
+}
+
+* + .ap-margin-large{ 
+    margin-top: $margin-large-margin !important; 
+}
+
+.ap-margin-large-top{ 
+    margin-top: $margin-large-margin !important; 
+}
+
+.ap-margin-large-bottom{ 
+    margin-bottom: $margin-large-margin !important; 
+}
+
+.ap-margin-large-left{ 
+    margin-left: $margin-large-margin !important; 
+}
+
+.ap-margin-large-right{ 
+    margin-right: $margin-large-margin !important; 
+}
+
+/* Desktop and bigger */
+@include respond-to(large){
+
+    .ap-margin-large{ 
+        margin-bottom: $margin-large-margin-l !important; 
+    }
+    
+    * + .ap-margin-large{ 
+        margin-top: $margin-large-margin-l !important; 
+    }
+    
+    .ap-margin-large-top{ 
+        margin-top: $margin-large-margin-l !important; 
+    }
+    
+    .ap-margin-large-bottom{ 
+        margin-bottom: $margin-large-margin-l !important; 
+    }
+    
+    .ap-margin-large-left{ 
+        margin-left: $margin-large-margin-l !important; 
+    }
+    
+    .ap-margin-large-right{ 
+        margin-right: $margin-large-margin-l !important; 
+    }
+
+}
+
+
+
+/*
+ * Large
+ */
+
+.ap-margin-xlarge{ 
+    margin-bottom: $margin-xlarge-margin !important; 
+}
+
+* + .ap-margin-xlarge{ 
+    margin-top: $margin-xlarge-margin !important; 
+}
+
+.ap-margin-xlarge-top{ 
+    margin-top: $margin-xlarge-margin !important; 
+}
+
+.ap-margin-xlarge-bottom{ 
+    margin-bottom: $margin-xlarge-margin !important; 
+}
+
+.ap-margin-xlarge-left{ 
+    margin-left: $margin-xlarge-margin !important; 
+}
+
+.ap-margin-xlarge-right{ 
+    margin-right: $margin-xlarge-margin !important; 
+}
+
+/* Desktop and bigger */
+@include respond-to(large){
+
+    .ap-margin-xlarge{ 
+        margin-bottom: $margin-xlarge-margin-l !important; 
+    }
+    
+    * + .ap-margin-xlarge{ 
+        margin-top: $margin-xlarge-margin-l !important; 
+    }
+    
+    .ap-margin-xlarge-top{ 
+        margin-top: $margin-xlarge-margin-l !important; 
+    }
+    
+    .ap-margin-xlarge-bottom{ 
+        margin-bottom: $margin-xlarge-margin-l !important; 
+    }
+    
+    .ap-margin-xlarge-left{ 
+        margin-left: $margin-xlarge-margin-l !important; 
+    }
+    
+    .ap-margin-xlarge-right{ 
+        margin-right: $margin-xlarge-margin-l !important; 
+    }
+    
+}
+
+
+
+/* Remove Margin
+   ================================================== */
+
+.ap-margin-remove{
+    margin: 0 !important;
+}
+
+.ap-margin-remove-top{
+    margin-top: 0 !important;
+}
+
+.ap-margin-remove-bottom{
+    margin-bottom: 0 !important;
+}
+
+.ap-margin-remove-left{
+    margin-left: 0 !important;
+}
+
+.ap-margin-remove-right{
+    margin-right: 0 !important;
+}
+
+.ap-margin-remove-vertical{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.ap-margin-remove-adjacent + *{
+    margin-top: !important;
+}
+
+
+
+/* Auto Margin
+   ================================================== */
+
+.ap-margin-auto{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.ap-margin-auto-top{
+    margin-top: auto !important;
+}
+
+.ap-margin-auto-bottom{
+    margin-bottom: auto !important;
+}
+
+.ap-margin-auto-left{
+    margin-left: auto !important;
+}
+
+.ap-margin-auto-right{
+    margin-right: auto !important;
+}
+
+.ap-margin-auto-vertical{
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}

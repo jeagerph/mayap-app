@@ -1,0 +1,204 @@
+// Name:            List
+// Description:     Styles for list
+//
+// Component:       `ap-list`
+//
+// Modifiers:       `ap-list-divider`
+//                  `ap-list-striped`
+//                  `ap-list-bullet`
+//                  `ap-list-large`
+//
+// ========================================================================
+
+// Variables
+// ========================================================================
+
+$list-margin-top:                           margin(small) !default;
+
+$list-nested-padding-left:                  gutter(small) !default;
+
+$list-divider-margin-top:                   margin(small) !default;
+$list-divider-border-width:                 border(border-width) !default;
+$list-divider-border:                       #E5E5E5 !default;
+
+$list-striped-padding-vertical:             margin(small) !default;
+$list-striped-padding-horizontal:           margin(small) !default;
+$list-striped-background:                   $global-muted-background !default;
+
+$list-bullet-width:                         (font(line-height) * 1em) !default;
+$list-bullet-height:                        $list-bullet-width !default;
+$list-bullet-margin-right:                  margin(small) !default;
+$list-bullet-icon-color:                    color(default) !default;
+
+$list-large-margin-top:                     margin(global) !default;
+$list-large-divider-margin-top:             margin(global) !default;
+$list-large-striped-padding-vertical:       margin(global) !default;
+$list-large-striped-padding-horizontal:     margin(small) !default;
+
+$internal-list-bullet-image: "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%226%22%20height%3D%226%22%20viewBox%3D%220%200%206%206%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Ccircle%20fill%3D%22#000%22%20cx%3D%223%22%20cy%3D%223%22%20r%3D%223%22%20%2F%3E%0A%3C%2Fsvg%3E" !default;
+
+
+/* ==================================================
+    Component: List
+   ================================================== */ 
+
+.ap-list{
+    padding: 0;
+    list-style: none;
+}
+
+
+/*
+ * Micro clearfix
+ */
+
+.ap-list{
+    @include clearfix;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.ap-list > li > :last-child{
+    margin-bottom: 0;
+}
+
+/*
+ * Nested lists
+ */
+
+.ap-list ul{
+    margin: 0;
+    padding-left: $list-nested-padding-left;
+    list-style: none;
+}
+
+/*
+ * Style
+ */
+
+.ap-list > li:nth-child(n+2),
+.ap-list > li > ul{
+    margin-top: $list-margin-top;
+}
+
+
+
+/* Style Modifiers
+   ================================================== */
+
+/*
+ * Divider
+ */
+
+.ap-list-divider > li:nth-child(n+2){
+    margin-top: $list-divider-margin-top;
+    padding-top: $list-divider-margin-top;
+    border-top: $list-divider-border-width solid $list-divider-border;
+}
+.ap-list-divider > li{
+    margin-top: $list-divider-margin-top;
+    padding-top: $list-divider-margin-top;
+    border-top: $list-divider-border-width solid $list-divider-border;
+}
+
+.ap-list-divider-bottom > li:nth-child(n+2){
+    margin-bottom: $list-divider-margin-top;
+    padding-bottom: $list-divider-margin-top;
+    border-bottom: $list-divider-border-width solid $list-divider-border;
+}
+.ap-list-divider-bottom > li{
+    margin-bottom: $list-divider-margin-top;
+    padding-bottom: $list-divider-margin-top;
+    border-bottom: $list-divider-border-width solid $list-divider-border;
+}
+
+
+/*
+ * Striped
+ */
+
+.ap-list-striped > li{
+    padding: $list-striped-padding-vertical $list-large-striped-padding-horizontal;
+}
+
+.ap-list-striped > li:nth-of-type(odd){
+    background: $list-striped-background;
+}
+
+.ap-list-striped > li:nth-child(n+2){
+    margin-top: 0;
+}
+
+.ap-list-hover{
+    transition: background 0.3s ease-in-out;
+}
+
+.ap-list-hover > li{
+    padding: $list-striped-padding-vertical $list-large-striped-padding-horizontal;
+}
+
+.ap-list-hover > li:hover {
+    background: $list-striped-background;
+}
+
+/*
+ * Bullet
+ * 1. Reset display `table` which cause issues in combination with multi column layouts.
+ */
+
+.ap-list-bullet > li{
+    position: relative;
+    padding-left: unquote('calc(#{$list-bullet-width} + #{$list-bullet-margin-right})');
+}
+
+.ap-list-bullet > li::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $list-bullet-width;
+    height: $list-bullet-height;
+    background: url($internal-list-bullet-image) $list-bullet-icon-color rgba(0 ,0, 0, 0);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* 1 */
+    display: block;
+}
+
+
+
+/* Size Modifier
+   ================================================== */
+
+.ap-list-large > li:nth-child(n+2),
+.ap-list-large > li > ul{
+    margin-top: $list-large-margin-top;
+}
+
+/*
+ * Divider
+ */
+
+.ap-list-large.ap-list-divider > li:nth-child(n+2){
+    margin-top: $list-large-divider-margin-top;
+    padding-top: $list-large-divider-margin-top;
+}
+
+/*
+ * Striped
+ */
+
+.ap-list-large.ap-list-striped{
+    padding: $list-large-striped-padding-vertical $list-large-striped-padding-horizontal;
+}
+
+.ap-list-large.ap-list-striped > li:nth-child(n+2){
+    margin-top: 0;
+}
+
+.ap-list-selected {
+    background:  #DCDCDC;
+    padding: 5px 5px;
+}

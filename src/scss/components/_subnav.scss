@@ -1,0 +1,340 @@
+// Name:            Subnav
+// Description:     Components to create a sub-navigation
+//
+// Component:       `ap-subnav`
+//
+// Modifiers:       `ap-subnav-divider`
+//                  `ap-subnav-divider`
+//
+// States:          `ap-active`
+//                  `ap-first-column`
+//
+// ========================================================================
+
+// Variables
+// ========================================================================
+
+$subnav-margin-vertical:                         gutter(small) !default;
+$subnav-margin-horizontal:                       gutter(xsmall) !default;
+
+$subnav-item-color:                              color(muted) !default;
+$subnav-item-hover-color:                        color(default) !default;
+$subnav-item-hover-text-decoration:              none !default;
+$subnav-item-active-color:                       color(primary) !default;
+
+$subnav-divider-margin-horizontal:               $subnav-margin-horizontal !default;
+$subnav-divider-border-height:                   1.5em !default;
+$subnav-divider-border-width:                    border(border-width) !default;
+$subnav-divider-border:                          border(border-color)!default;
+
+$subnav-pill-item-padding-vertical:              margin(small) !default;
+$subnav-pill-item-padding-horizontal:            gutter(small) !default;
+$subnav-pill-item-background:                    transparent !default;
+$subnav-pill-item-color:                         $subnav-item-color !default;
+$subnav-pill-item-hover-background:              color(muted) !default;
+$subnav-pill-item-hover-color:                   color(default) !default;
+$subnav-pill-item-onclick-background:            $subnav-pill-item-hover-background !default;
+$subnav-pill-item-onclick-color:                 $subnav-pill-item-hover-color !default;
+$subnav-pill-item-active-background:             color(primary) !default;
+$subnav-pill-item-active-color:                  color(inverse) !default;
+
+$subnav-item-disabled-color:                     color(muted) !default;
+
+
+
+/* ==================================================
+    Component: Subnav
+   ================================================== */ 
+
+
+/*
+ * 1. Allow items to wrap into the next line
+ * 2. Reset list
+ */
+
+.ap-subnav{
+    display: flex;
+    /* 1 */
+    flex-wrap: wrap;
+    /* 2 */
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * 1. Space is allocated solely based on content dimensions: 0 0 auto
+ * 2. Create position context for dropdowns
+ */
+
+.ap-subnav > *{
+    /* 1 */
+    flex: none;
+    /* 2 */
+    position: relative;
+}
+
+/*
+ * 1. It will consume the entire width of the parent
+ * 2. Create position context for dropdowns
+ */
+
+.ap-subnav-full > *{
+    /* 1 */
+    flex: 1;
+    /* 2 */
+    position: relative;
+}
+
+@include respond-to-max(small){
+    .ap-subnav-full\@s > *{
+        /* 1 */
+        flex: 1;
+        /* 2 */
+        position: relative;
+    }
+}
+
+/*
+ * 1. Add gutter in anchor
+ * 2. Add border-bottom `::after`
+ */
+
+/* 1 */
+.ap-subnav > .ap-subnav-pill-item > a{
+    padding: $subnav-margin-vertical $subnav-margin-horizontal;
+}
+
+
+
+/* Items
+ ========================================================================== */
+
+/*
+ * Items must target `a` elements to exclude other elements (e.g. dropdowns)
+ * Using `:first-child` instead of `a` to support `span` elements for text
+ * 1. Prevent gap if child element is `inline-block`, e.g. an icon
+ * 2. Style
+ */
+
+.ap-subnav > * > :first-child{
+    /* 1 */
+    display: block;
+    /* 2 */
+    color: $subnav-item-color;
+}
+
+/* Hover + Focus */
+.ap-subnav > * > a:hover,
+.ap-subnav > * > a:focus{
+    color: $subnav-item-hover-color;
+    text-decoration: $subnav-item-hover-text-decoration;
+    outline: none;
+}
+
+/* Active */
+.ap-subnav > .ap-active > a{
+    color: $subnav-item-active-color;
+}
+
+
+/* Default
+ ========================================================================== */
+
+.ap-subnav-default{
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.ap-subnav-default > .ap-active{
+    padding-bottom: 8px;
+    border-bottom: 1px solid color(primary);
+}
+
+.ap-subnav-default > * > a{
+    padding: 0px 16px;
+}
+
+
+/* Divider modifier
+ ========================================================================== */
+
+/*
+ * 1. Align items and divider vertically
+ */
+
+.ap-subnav-divider > *{
+    /* 1 */
+    display: flex;
+    align-items: center;
+}
+
+/*
+ * Divider
+ * `nth-child` makes it also work without JS if it's only one row
+ */
+
+.ap-subnav-divider > :nth-child(n+2):not(.ap-first-column)::before{
+    content: "";
+    height: $subnav-divider-border-height;
+    // margin-left: ($subnav-divider-margin-horizontal - $subnav-margin-horizontal);
+    margin-right: $subnav-divider-margin-horizontal;
+    border-left: $subnav-divider-border-width solid $subnav-divider-border;
+}
+
+
+
+/* Stepper modifier
+ ========================================================================== */
+.ap-subnav-stepper{
+    justify-content: center;
+}
+
+.ap-subnav-stepper > li div.ap-stepper{
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 100%;
+    color: color(default);
+    background-color: $global-muted-background;
+}
+
+/* Vertical center */
+.ap-subnav-stepper > li *{
+    display: inline-block;
+    vertical-align: center;
+}
+
+.ap-subnav-stepper > li.ap-active div.ap-stepper{
+    background-color: color(primary);
+    color: #FFFFFF;
+}
+
+.ap-subnav-stepper > li{
+    margin-right: 60px;
+}
+
+.ap-subnav-stepper > li:last-child(){
+    margin-right: 0px;
+}
+
+.ap-subnav-stepper > :nth-child(n+2):not(.ap-first-column)::after{
+    content: "";
+    height: 1px;
+    width: 30px;
+    position: absolute;
+    top: 50%;
+    left: -45px;
+    background-color: #999999;
+}
+
+
+/* Pill modifier
+ ========================================================================== */
+
+.ap-subnav-pill > *{
+    border: 0.5px solid color(primary);
+    padding: 0 $subnav-pill-item-padding-horizontal;
+    height: 40px;
+    line-height: 40px;
+    width: auto;
+    text-align: center;
+    cursor: pointer;
+    margin-right: -1px;
+    transition: all 0.15s linear;
+}
+
+.ap-subnav-pill > *:first-child{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.ap-subnav-pill > *:last-child{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin: 0px;
+}
+
+.ap-subnav-pill > .ap-active > a{
+    color: $subnav-pill-item-active-color;
+}
+
+.ap-subnav-pill > .ap-active{
+    background: $subnav-pill-item-active-background;
+}
+
+.ap-subnav-pill > *:hover:not(.ap-active){
+    background: lighten(color(primary), 2%);
+}
+
+.ap-subnav-pill > *:hover > a{
+    color: color(inverse);
+}
+
+
+/* Direction Modifier
+ ========================================================================== */
+.ap-subnav-column{
+    flex-direction: column;
+}
+
+
+/* Disabled
+ * The same for all style modifiers
+ ========================================================================== */
+
+.ap-subnav > .ap-disabled > a{
+    color: $subnav-item-disabled-color;
+}
+
+@include respond-to-max(medium){
+    ::-webkit-scrollbar {
+        width: 0px;  /* Remove scrollbar space */
+        height: 0px;
+        background: none;  /* Optional: just make scrollbar invisible */
+    }
+    /* Optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+        background: none;
+    }
+
+    .ap-subnav-default{
+        border-bottom: none;
+    }
+}
+
+
+.ap-subnav-wrapper{
+    width: 100%;
+    overflow-y: auto;    
+}
+
+.ap-subnav-horizontal-scroll{
+    flex-wrap: nowrap;
+}
+
+.ap-switcher{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+
+/* Items
+   ================================================== */
+
+/*
+ * Hide not active items
+ */
+
+.ap-switcher > :not(.ap-active){
+    display: none;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.ap-switcher > * > :last-child{
+    margin-bottom: 0;
+}
