@@ -82,6 +82,16 @@
             </a>
         </router-link>
 
+        <router-link
+            tag="li"
+            to="/company/ask-ai">
+            <a>
+                <div class="parent-icon"><i class='bx bx-message-rounded-dots'></i>
+                </div>
+                <div class="menu-title">Smart Search</div>
+            </a>
+        </router-link>
+
         <!-- <router-link
             tag="li"
             to="/company/incentives">
@@ -91,7 +101,6 @@
                 <div class="menu-title">Incentives</div>
             </a>
         </router-link> -->
-
 
         <li class="menu-label">
             BARANGAYS
@@ -209,6 +218,7 @@
                     Templates
                 </div>
             </a>
+
             <ul
                 :class="templatesClass">
 
@@ -239,7 +249,7 @@
             </a>
         </router-link> -->
     </ul>
-    
+
 </template>
 
 <script>
@@ -296,7 +306,7 @@ export default
         toggleDropdown(name)
         {
             this[`${name}Class`] = 'mm-collapsing';
-            
+
             let dropdown = this[`${name}Dropdown`];
 
             this[`${name}Dropdown`] = !dropdown;
@@ -311,7 +321,7 @@ export default
                     this[`${name}Class`] = 'mm-collapse';
                 }
             }, 50);
-            
+
         },
     }
 }

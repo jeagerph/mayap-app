@@ -62,7 +62,7 @@ export default
         ...mapGetters({
             isLoading: 'auth/isLoading',
         }),
-        
+
     },
 
     methods:
@@ -74,15 +74,17 @@ export default
         async submit()
         {
             this.errors = {};
-            
+
             const response = await this.signout();
 
             if (response.status === 200)
             {
 
-                const localhost = 'http://localhost:8000';
+                // const localhost = 'http://localhost:8000';
 
-                window.location.href = window.location.href.includes('localhost') ? `${localhost}/signin` : process.env.APP_WEB_URL;
+                // const webUrl = process.env.APP_WEB_URL;
+
+                window.location.href = 'https://mayap.ph';
 
             }
             else if (response.status === 403)

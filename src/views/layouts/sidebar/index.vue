@@ -2,7 +2,7 @@
     <div class="sidebar-wrapper"
         @mouseover="hover(true)"
         @mouseleave="hover(false)">
-        
+
         <div class="simplebar-height-auto-observer-wrapper">
             <div class="simplebar-height-auto-observer"></div>
         </div>
@@ -31,10 +31,10 @@
                                 <i class='bx bx-menu'></i>
                             </div>
                         </div>
-                        
+
                         <admin-menu
                             v-if="!isLoading('user') && isAdmin"/>
-                        
+
                         <company-menu
                             v-if="!isLoading('user') && isCompany"/>
 
@@ -106,7 +106,7 @@ export default
         {
             if (this.isCompany)
                 return this.accessUser.company.status;
-            
+
             return true;
         },
 
@@ -148,7 +148,7 @@ export default
         toggleDropdown(name)
         {
             this[`${name}Class`] = 'mm-collapsing';
-            
+
             let dropdown = this[`${name}Dropdown`];
 
             this[`${name}Dropdown`] = !dropdown;
@@ -163,7 +163,7 @@ export default
                     this[`${name}Class`] = 'mm-collapse';
                 }
             }, 50);
-            
+
         },
     },
 };

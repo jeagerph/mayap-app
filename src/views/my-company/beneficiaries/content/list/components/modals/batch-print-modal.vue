@@ -117,11 +117,13 @@
           >
             <ap-button
               type="submit"
+
               class="ap-button ap-button-small ap-button-full-rounded ap-margin-xsmall-right"
             >
               {{ isFormLoading ? "Loading..." : "Submit" }}
             </ap-button>
             <ap-button
+
               class="ap-button ap-button-small ap-button-full-rounded ap-margin-xsmall-right"
               :color="'secondary'"
               @click="closeModal()"
@@ -181,28 +183,62 @@ export default {
     }),
 
     async submit() {
-      this.isFormLoading = true;
-      const response = await Http.post(
-        `/my-company/beneficiary/batch-print`,
-        this.form
-      );
 
-      if (response.status === 200) {
-        Toast.success("Batch print successful.");
-        this.identifications = response.data;
+      if(this.isFormLoading) return;
 
-        this.download();
-      } else {
-        Toast.error("Unable to batch print.");
+      try{
+        this.isFormLoading = true;
+        const response = await Http.post(
+          `/my-company/beneficiary/batch-print`,
+          this.form
+        );
+
+        if (response.status === 200) {
+          Toast.success({
+            message : "Batch print successful."
+          });
+          this.identifications = response.data;
+
+          this.download();
+        } else {
+          Toast.error({
+            message : "Unable to load provinces."
+          });
+        }
+      }catch(e){
+        this.isFormLoading = false;
+        console.log(`Error submit : ${JSON.stringify(e)}`);
+        Toast.error({
+          message : "Unable to load provinces."
+        });
+      }
+
+    },
+    async handlerSuccess(){
+
+      const allCodes = this.identifications.map(({code}) => ({code}));
+
+      try{
+        const response = await Http.post('/my-company/beneficiaries/update-printed-identifications',{
+          codes : allCodes
+        });
+
+        Toast.success({
+          message : response.data.message
+        });
+
+      }catch(e){
+        console.log(`Handler Success Error : ${JSON.stringify(e)}`);
       }
     },
-
     async loadProvinces() {
       const response = await Http.get(`/my-company/beneficiary/provinces`);
       if (response.status === 200) {
         this.provinces = response.data.data;
       } else {
-        Toast.error("Unable to load provinces.");
+        Toast.error({
+          message : "Unable to load provinces."
+        });
       }
 
       this.form.selectedCity = null;
@@ -217,7 +253,9 @@ export default {
       if (response.status === 200) {
         this.cities = response.data.data;
       } else {
-        Toast.error("Unable to load provinces.");
+        Toast.error({
+          message : "Unable to load provinces."
+        });
       }
 
       this.form.selectedBarangay = null;
@@ -230,7 +268,9 @@ export default {
       if (response.status === 200) {
         this.barangays = response.data.data;
       } else {
-        Toast.error("Unable to load provinces.");
+        Toast.error({
+          message : "Unable to load provinces."
+        });
       }
     },
 
@@ -269,20 +309,38 @@ export default {
     },
 
     async download() {
-      const response = await Http.post(
+
+      try{
+        const response = await Http.post(
         `/my-company/beneficiary/identifications/download`,
         {
           identifications: this.identifications,
         }
-      );
-      if (response.status === 200) {
-        window.open(response.data.path);
-        Toast.success("Batch print successful.");
-        this.isFormLoading = false;
-      } else {
-        Toast.error("Unable to batch print.");
-        this.isFormLoading = false;
+        );
+        if (response.status === 200) {
+
+          this.handlerSuccess();
+
+          window.open(response.data.path);
+
+          Toast.success({
+            message : "Batch print successful."
+          });
+
+          this.isFormLoading = false;
+        } else {
+          Toast.error({
+            message : "Unable to batch print."
+          });
+          this.isFormLoading = false;
+        }
+      }catch(e){
+        console.log(`Download error : ${JSON.stringify(e)}`);
+        Toast.error({
+          message : "Unable to batch print."
+        });
       }
+
     },
   },
 

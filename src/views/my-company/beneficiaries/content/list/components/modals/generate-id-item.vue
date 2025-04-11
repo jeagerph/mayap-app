@@ -38,6 +38,7 @@ export default
         return {
             submitLoading: false,
             downloadLoading: false,
+            code : ''
         };
     },
 
@@ -57,13 +58,33 @@ export default
                 message: 'Template not yet available.'
             });
         },
+        async handlerSuccess(){
+
+          const allCodes = [];
+          allCodes.push({
+            code : this.code
+          });
+
+          try{
+            const response = await Http.post('/my-company/beneficiaries/update-printed-identifications',{
+              codes : allCodes
+            });
+
+            Toast.success({
+              message : response.data.message
+            });
+
+          }catch(e){
+            console.log(`Handler Success Error : ${JSON.stringify(e)}`);
+          }
+        },
 
         async submit()
         {
             this.errors = {};
 
             this.submitLoading = true;
-            
+
             const response = await Http.post(
                 `/my-company/beneficiary/${this.selected.slug.code}/identification`,
                 {
@@ -84,6 +105,7 @@ export default
             if (response.status === 201)
             {
                 this.download(response.data.id);
+                this.code = response.data.code;
             }
             else if (response.status === 403)
             {
@@ -94,11 +116,12 @@ export default
                         ? response.data.error.description
                         : message,
                 });
+                this.code = '';
             }
             else if (response.status === 404)
             {
                 let message = 'Data not found. Please try again.';
-
+                this.code = '';
                 Toast.error({
                     message: response.data.error.description
                         ? response.data.error.description
@@ -108,7 +131,7 @@ export default
             else
             {
                 let message = 'Something went wrong. Please try again.';
-
+                this.code = '';
                 Toast.error({
                     message: response.data.error.description
                         ? response.data.error.description
@@ -128,9 +151,9 @@ export default
             if (response.status == 200)
             {
                 window.open(response.data.path);
-
+                this.handlerSuccess();
                 this.closeModal();
-
+                this.code = '';
                 Toast.success({
                     message: 'ID has been generated.'
                 });

@@ -14,7 +14,7 @@
                             <form class="ap-form-stacked ap-margin-top"
                                 @submit.prevent="submit()">
                                 <fieldset class="ap-fieldset">
-                                    
+
                                     <ap-input
                                         type="text"
                                         :required="true"
@@ -61,7 +61,13 @@ import { mapActions, mapGetters } from 'vuex';
 export default
 {
     name: 'Signin',
+    mounted() {
+      const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
+      if (!isLocalhost) {
+        window.location.href = 'https://mayap.ph';
+      }
+    },
     data()
     {
         return {
@@ -83,7 +89,6 @@ export default
             isLoading: 'auth/isLoading',
         }),
     },
-
     methods:
     {
         ...mapActions({
